@@ -1,4 +1,4 @@
-# nms_v2
+# nms_
 This is a network monitoring systems web apps. Created using Meteor.js, a fullstack javascript platform.
 
 To running in development mode:
