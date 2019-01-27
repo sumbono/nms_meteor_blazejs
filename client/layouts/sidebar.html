@@ -1,0 +1,619 @@
+<template name="sidebar">
+    <style>
+        .skin-blue .sidebar-menu > li:first-child,
+        .skin-blue .sidebar-menu > li.header:hover,
+        .skin-blue .sidebar-menu > li.header.active,
+        .skin-blue .sidebar-menu > li.header:hover > a {cursor: pointer;background: #f9ff4d;}
+        .skin-blue .sidebar-menu > li.active > a {cursor: pointer;background: #f9ff4d;}
+        .skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {color: #404040;}
+        .skin-blue .treeview-menu>li.active>a, .skin-blue .treeview-menu>li>a:hover {cursor: pointer;background: #f9ff4d;}
+        .skin-blue .treeview-menu>li:hover>a, .skin-blue .treeview-menu>li.active>a {color: #404040;}
+
+        /* style for status template */
+        .progress-group .progress-text {font-weight: 300;}
+        .quick-list.door-sensor li {padding-top: 10px;}
+        table.device-info tr td {border-bottom-color: #a5a5a5 !important;}
+        table.device-info tr td:first-child {padding-left: 25px;}
+        table.device-info tr:last-child td {border-bottom-color: none;}
+        .box-header .box-title {font-size: 22px;}
+        .equipment>li:hover {cursor: pointer;background-color: #404040;}
+        .equipment li.active {background-color: #404040;}
+        #mybarChart {height: 150px !important;}
+        .modal-body .sidebar-menu li>a>.pull-right-container {top: inherit;}
+        .modal-body .sidebar-menu li>a {color: #5A738E !important;}
+        .modal-body .sidebar-menu>li>.treeview-menu {background: #ffba00;}
+        .pagination-detail {display: none;}
+        .pagination {font-size: 11px;}
+    </style>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <!-- <div class="sidebar main-sidebar"> -->
+        <section class="sidebar" id="scrollspy">
+            <ul class="nav sidebar-menu report-sidebar-menu">
+                {{#each data_scope}}
+                <li class="header" style="background: #59656c;padding: 0 0;">
+                    <!-- padding: 10px 25px 10px 15px;  -->
+                    <a href="" style="font-size: 14px;"  class="buttonpertama">
+                        <span id="nasional" style="border-left: 4px solid #2ecc71;"></span>{{name}}</a>
+                </li>
+<!--                <li class="header" style="background: #59656c;padding: 0 0;" data-regionID="5b596c26c6e9371ab5f120a8">
+                    
+                    <a href="#" id="network1" data-regionID="5b596c26c6e9371ab5f120a8" class="buttonkedua" style="font-size: 14px;">
+                        <span id="city" style="border-left: 4px solid #2ecc71;"></span>NETWORK 1</a>
+                </li>
+              <li class="header" style="background: #59656c;padding: 0 0;" data-regionID="5b596c35c6e9371ab5f120a9">
+                   
+                    <a href="#" style="font-size: 14px;" class="buttonketiga" data-regionID="5b596c35c6e9371ab5f120a9">
+                        <span id="network2" style="border-left: 4px solid #2ecc71;"></span>NETWORK 2</a>
+                </li> -->
+                {{/each}}
+
+                {{#each region in data_region}}
+                <li class="treeview" id="region_menu" data-regionID="{{region._id._str}}">
+                    <a href="#" id="region" data-namanet="{{region.name}}" data-regionID="{{region._id._str}}" style="padding-top: 10px; padding-bottom: 10px;">
+                        <i class="fa fa-angle-left"></i>
+                        <span id="city" style="border-left: 4px solid #2ecc71;">{{region.name}}</span>
+                    </a>
+                  
+<!--                     <ul class="treeview-menu">
+                      {{#each province in data_province region._id}}
+                        <li>
+                          <a href="#" id="province" data-siteID="{{province._id._str}}">
+                              <i class="fa fa-angle-left"></i><span id="site" style="border-left: 4px solid; border-color:">{{province.name}}</span>
+                          </a> -->
+                            <ul class="treeview-menu"  id="sub_region_menu">
+                                {{#each site in data_site region._id}}
+                                    <li id="site_menu" region-id="{{site._id._str}}">
+                                        <!-- <a href="{{pathFor 'siteReport' _id = site._id._str}}" id="site" data-siteID="{{site._id._str}}"> -->
+                                        <a href="#" id="site" data-siteID="{{site._id._str}}">
+                                            <i class="fa fa-angle-left text-grey"></i>
+                                            <span id="site" style="border-left: 4px solid; border-color:{{site.status}}">{{site.name}}</span>
+                                        </a>
+                                        <ul class="treeview-menu treeview-menu-last" style="display: none;" id="sub_site_menu">
+                                            {{#each category in data_device_category site._id}}
+                                                <li class="active">
+                                                  <a href="#" id="site_device_category" data-deviceCategoryID="{{category._id._str}}">
+                                                    <!-- <span id="site" style="border-left: 4px solid; border-color:#2ecc71">{{category.name}}</span> -->
+                                                    <span id="site" style="border-left: 4px solid; border-color:">{{category.name}}</span>
+                                                  </a>
+                                                </li>
+                                            {{/each}}
+                                        </ul>
+                                    </li>
+                                {{/each}}
+                            </ul>
+<!--                           </li>
+                        {{/each}}
+                      </ul> -->
+                </li>
+                {{/each}}
+            </ul>
+        </section>
+    </aside><!-- /.main-sidebar -->
+
+    <!-- Control Sidebar -->
+        <style>
+        .label {
+        color: white;
+        padding: 8.5px;
+        font-family: Arial;
+        }
+        .A {background-color: #2ecc71;} 
+        .B {background-color: #2ecc71;} 
+        .C {background-color: #f39c11;}
+        .D {background-color: #f39c11;}
+        .E {background-color: #dd4c39;}
+        .F {background-color: #dd4c39;}
+        
+        </style>
+  
+  <aside class="control-sidebar control-sidebar-light">
+        <button type="button" class="btn btn-primary pull-right" data-toggle="control-sidebar" style="color: #868686; margin:0;border-radius: 0; border: none; background-color: #faff69;" aria-label="Right Align">
+          <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+        </button>
+        <div style="float: none; clear: both"></div>
+      
+      <div class="box box-solid" style="border-radius: 0 0; background: none; box-shadow: none;">
+            <div class="box-header">
+                <i class="fa fa-podcast"></i>
+                <strong><p class="box-title" style="font-size: 20px;">Communication</p></strong>
+            </div>
+           <div class="box-body" style="padding-top: 0;">
+   <ul style="font-size: 15px; padding-left: 4px;">
+<!--       <li style="padding-bottom: 4px"><a href="#" style="color: #444;"><i class="fa fa-circle-o" style="color:  #1abb9c"></i>&nbsp;LAN</a>  <button class="btn btn-xs btn-success" type="button">Active</button></li> -->
+      <li class="communication" style="padding-bottom: 4px">
+        <!-- <i class="fa fa-circle-o" style="color: "></i>&nbsp;LAN/Cellular  -->
+        <!-- <span class="label C">Slow Connection</span> -->
+     </li>
+      
+   </ul>
+</div>
+        
+        <div class="box-header">
+                <i class="fa fa-hdd-o"></i>
+                 <strong><p class="box-title" style="font-size: 20px;">Controller</p></strong>
+            </div>
+            <div class="box-body" style="padding-top: 0;">
+                <ul style="font-size: 15px; padding-left: 4px;">
+                  <li class="controller1" style="padding-bottom: 4px">
+<!--                     <a href="#" style="color: #444;">
+                      <i class="fa fa-circle-o" style="color: red"></i>&nbsp;Squash
+                    </a> <span class="label E">Offline</span> -->
+                  </li>
+                  <li class="controller2" style="padding-bottom: 4px">
+<!--                     <a href="#" style="color: #444;">
+                      <i class="fa fa-circle-o" style="color: #1abb9c"></i>&nbsp;Middleware
+                    </a> <span class="label A">Active</span> -->
+                  </li>
+               </ul>
+            </div>
+        <style>
+.button {
+  background-color: #dd4b39;
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+}
+          
+.buttonm {
+  background-color: #f39c12;
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+}
+          
+.button1 {border-radius: 2px;}
+.button2 {border-radius: 4px;}
+.button3 {border-radius: 8px;}
+.button4 {border-radius: 12px;}
+.button5 {border-radius: 50%;}
+        </style>
+        
+        <div class="box-header">
+                <i class="fa flaticon-alarm"></i>
+                 <strong><p class="box-title" style="font-size: 20px;">Alarm</p></strong>
+            </div>
+            <div class="box-body" style="padding-top: 0;">
+                <ul style="font-size: 15px; padding-left: 4px;">
+                  <li class="" style="padding-bottom: 4px">
+                    <a href="#" style="color: #444;" data-siteID="{{site._id._str}}">
+                      <i class="fa fa-circle-o"></i>&nbsp;Major
+                    </a > <button class="buttonm button3" id="majorgrup"><b>{{major_jumlah}} ({{major_persen}})</b></button>
+                  </li>
+                  <li class="" style="padding-bottom: 4px">
+                    <a href="#" style="color: #444;" data-siteID="{{site._id._str}}">
+                      <i class="fa fa-circle-o"></i>&nbsp;Critical
+                    </a> <button class="button button3" id="criticalgrup"><b>{{critical_jumlah}} ({{critical_persen}})</b></button>
+                  </li>
+<!--                    <li class="" style="padding-bottom: 4px">
+                    <a id="alarmhistory" href="" style="color: #444;" data-siteID="{{site._id._str}}">
+                      <i class="fa fa-circle-o"></i>&nbsp;<u>Alarm History</u>
+                    </a> 
+                  </li> -->
+               </ul>
+            </div>
+        
+        <div class="box-header">
+                <i class="fa flaticon-data-network"></i>
+                 <strong><p class="box-title" style="font-size: 20px;">Data</p></strong>
+            </div>
+            <div class="box-body" style="padding-top: 0;">
+                <ul class="list-group panel-data" style="font-size: 14px; padding-left: 4px;">
+                </ul>
+            </div>
+
+        </div>
+
+<!--         <div class="box box-solid" style="border-radius: 0 0; background: none; box-shadow: none;">
+            <div class="box-header">
+                <i class="fa flaticon-data-network"></i>
+                 <strong><p class="box-title" style="font-size: 20px;">Data</p></strong>
+            </div>
+            <div class="box-body" style="padding-top: 0;">
+                <ul class="list-group panel-data" style="font-size: 14px; padding-left: 4px;">
+                </ul>
+            </div>
+
+        </div>
+ -->
+        <div class="box box-solid" style="border-radius: 0 0; background: none; box-shadow: none;">
+<!--             <div class="box-header">
+                <i class="fa flaticon-alarm"></i>
+                <h1 class="box-title"><a class="menu-alarm-sidebarcontrol" href="<?php echo base_url() ?>report/alarm" style="color: #444;">Alarm</a></h1>
+            </div> -->
+<!--             <div class="box-body">
+                <ul class="list-group" style="font-size: 14px; padding-left: 4px;">
+                    <li style="padding: 4px 4px;" class="bg-green">&nbsp;<strong>All Clear</strong></li>
+                </ul>
+            </div> -->
+        </div>
+    </aside>
+  
+    <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+  
+  <!-- MODAL MAJOR GRUP -->
+<div class="modalmajor modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-yellow color-palette">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title text-center">Alarm Major Group</h4>
+       </div>
+       <div class="modal-body">
+          <div class="box box-primary">
+             <div class="box-header with-border">
+                <h3 class="box-title">{{name}}</h3>
+             </div>
+             <div class="box-body">
+            <div class="bootstrap-table">
+
+              <div class="fixed-table-container" style="padding-bottom: 0px;">
+                 <div class="fixed-table-header" style="display: none;">
+                    <table></table>
+                 </div>
+                 <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 100%;">
+                    <div class="fixed-table-body" style="overflow: hidden; width: 100%; height: 100%;">
+                       <div class="fixed-table-loading" style="top: 41px;">Loading, please wait...</div>
+                      
+                       <table id="table" data-search="true" data-sort-name="time" data-row-style="rowStyle" data-sort-order="desc" class="table table-hover">
+                          <thead class="bg-yellow">
+                             <tr>
+                                <th style="text-align: center; width: 15%; " data-field="date">
+                                   <div class="th-inner sortable both">Date/Time</div>
+                                   <div class="fht-cell"></div>
+                                </th>
+                                <th style="text-align: center; width: 8%; " data-field="time">
+                                   <div class="th-inner sortable both desc">Parameter</div>
+                                   <div class="fht-cell"></div>
+                                </th>
+                                <th style="text-align: center; " data-field="alarm">
+                                   <div class="th-inner sortable both">Devices</div>
+                                   <div class="fht-cell"></div>
+                                </th>
+                                <th style="text-align: center; " data-field="value">
+                                   <div class="th-inner sortable both">Value</div>
+                                   <div class="fht-cell"></div>
+                                </th>
+                                <th style="text-align: center; " data-field="severity">
+                                   <div class="th-inner sortable both">Alarm status</div>
+                                   <div class="fht-cell"></div>
+                                </th>
+                                <th style="text-align: center; " data-field="status">
+                                   <div class="th-inner sortable both">Desc</div>
+                                   <div class="fht-cell"></div>
+                                </th>
+                             </tr>
+                          </thead>
+                          <tbody class="majorData">
+<!--                              <tr class="" data-index="0" id="detailbar">
+                                <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                                <td style="text-align: center; width: 8%; ">0E-7</td>
+                                <td style="">TX A Vision</td>
+                                <td style="">18 Kw</td>
+                                <td style=""><span class="label C">MAJOR</span></td>
+                                <td style="">Active</td>
+                             </tr> -->
+<!--                              <tr class="" data-index="0" id="detailbar">
+                                <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                                <td style="text-align: center; width: 8%; ">0E-7</td>
+                                <td style="">TX A Vision</td>
+                                <td style="">18 Kw</td>
+                                <td style=""><span class="label C">MAJOR</span></td>
+                                <td style="">Active</td>
+                             </tr>
+                            <tr class="" data-index="0" id="detailbar">
+                                <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                                <td style="text-align: center; width: 8%; ">0E-7</td>
+                                <td style="">TX A Vision</td>
+                                <td style="">18 Kw</td>
+                                <td style=""><span class="label C">MAJOR</span></td>
+                                <td style="">Active</td>
+                             </tr>
+                            <tr class="" data-index="0" id="detailbar">
+                                <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                                <td style="text-align: center; width: 8%; ">0E-7</td>
+                                <td style="">TX A Vision</td>
+                                <td style="">18 Kw</td>
+                                <td style=""><span class="label C">MAJOR</span></td>
+                                <td style="">Active</td>
+                             </tr>
+                            <tr class="" data-index="0" id="detailbar">
+                                <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                                <td style="text-align: center; width: 8%; ">0E-7</td>
+                                <td style="">TX A Vision</td>
+                                <td style="">18 Kw</td>
+                                <td style=""><span class="label C">MAJOR</span></td>
+                                <td style="">Active</td>
+                             </tr>
+                            <tr class="" data-index="0" id="detailbar">
+                                <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                                <td style="text-align: center; width: 8%; ">0E-7</td>
+                                <td style="">TX A Vision</td>
+                                <td style="">18 Kw</td>
+                                <td style=""><span class="label C">MAJOR</span></td>
+                                <td style="">Active</td>
+                             </tr>
+                             <tr class="" data-index="0" id="detailbar">
+                                <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                                <td style="text-align: center; width: 8%; ">0E-7</td>
+                                <td style="">TX A Vision</td>
+                                <td style="">18 Kw</td>
+                                <td style=""><span class="label C">MAJOR</span></td>
+                                <td style="">Active</td>
+                             </tr>
+                             <tr class="" data-index="0" id="detailbar">
+                                <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                                <td style="text-align: center; width: 6%; ">0E-7</td>
+                                <td style="">TX A Vision</td>
+                                <td style="">18 Kw</td>
+                                <td style=""><span class="label C">MAJOR</span></td>
+                                <td style="">Active</td>
+                             </tr> -->
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="slimScrollBar" style="background: rgb(52, 152, 219); width: 4px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 337px;"></div>
+                    <div class="slimScrollRail" style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+                 </div>
+                 <div class="fixed-table-footer" style="display: none;">
+                    <table>
+                       <tbody>
+                          <tr></tr>
+                       </tbody>
+                    </table>
+                 </div>
+                 <div class="fixed-table-pagination" style="display: none;"></div>
+              </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+  <!-- END MAJOR GRUP -->
+  
+   <!-- MODAL CRITICAL GRUP -->
+      <div class="modalcritical modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-red color-palette">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h4 class="modal-title text-center">Alarm Critical Group</h4>
+   </div>
+       <div class="modal-body">
+      <div class="box box-primary">
+         <div class="box-header with-border">
+            <h3 class="box-title">{{name}}</h3>
+         </div>
+         <div class="box-body">
+   <div class="bootstrap-table">
+     
+      <div class="fixed-table-container" style="padding-bottom: 0px;">
+         <div class="fixed-table-header" style="display: none;">
+            <table></table>
+         </div>
+         <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 100%;">
+            <div class="fixed-table-body" style="overflow: hidden; width: 100%; height: 100%;">
+               <div class="fixed-table-loading" style="top: 41px;">Loading, please wait...</div>
+               <table id="table" data-search="true" data-sort-name="time" data-row-style="rowStyle" data-sort-order="desc" class="table table-hover">
+                  <thead class="bg-red">
+                     <tr>
+                        <th style="text-align: center; width: 16.2%; " data-field="date">
+                           <div class="th-inner sortable both">Date/Time</div>
+                           <div class="fht-cell"></div>
+                        </th>
+                        <th style="text-align: center; width: 8%; " data-field="time">
+                           <div class="th-inner sortable both desc">Parameter</div>
+                           <div class="fht-cell"></div>
+                        </th>
+                        <th style="text-align: center; " data-field="alarm">
+                           <div class="th-inner sortable both">Devices</div>
+                           <div class="fht-cell"></div>
+                        </th>
+                        <th style="text-align: center; " data-field="value">
+                           <div class="th-inner sortable both">Value</div>
+                           <div class="fht-cell"></div>
+                        </th>
+                        <th style="text-align: center; " data-field="severity">
+                           <div class="th-inner sortable both">Alarm status</div>
+                           <div class="fht-cell"></div>
+                        </th>
+                        <th style="text-align: center; " data-field="status">
+                           <div class="th-inner sortable both">Desc</div>
+                           <div class="fht-cell"></div>
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody class="criticalData">
+                     <tr class="" data-index="0" id="detailbar">
+                        <td style="text-align: center; width: 15%; ">18-Aug-18,21:00</td>
+                        <td style="text-align: center; width: 8%; ">0E-7</td>
+                        <td style="">TX A Vision</td>
+                        <td style="">18 Kw</td>
+                        <td style=""><span class="label E">CRITICAL</span></td>
+                        <td style="">Active</td>
+                     </tr>
+                    
+                  </tbody>
+               </table>
+            </div>
+            <div class="slimScrollBar" style="background: rgb(52, 152, 219); width: 4px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 337px;"></div>
+            <div class="slimScrollRail" style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+         </div>
+         <div class="fixed-table-footer" style="display: none;">
+            <table>
+               <tbody>
+                  <tr></tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="fixed-table-pagination" style="display: none;"></div>
+      </div>
+   </div>
+   <div class="clearfix"></div>
+</div>
+      </div>
+   </div>
+    </div>
+  </div>
+</div>
+  <!-- END CRITICAL GRUP -->
+  
+   <!-- MODAL HISTORY GRUP -->
+      <div class="modalhistory modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-blue color-palette">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h4 class="modal-title text-center">Alarm History</h4>
+   </div>
+       <div class="modal-body">
+      <div class="box box-primary">
+         <div class="box-header with-border">
+            <h3 class="box-title">{{name}}</h3>
+         </div>
+         <div class="box-body">
+   <div class="bootstrap-table">
+     
+      <div class="fixed-table-container" style="padding-bottom: 0px;">
+         <div class="fixed-table-header" style="display: none;">
+            <table></table>
+         </div>
+         <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 100%;">
+            <div class="fixed-table-body" style="overflow: hidden; width: 100%; height: 100%;">
+               <div class="fixed-table-loading" style="top: 41px;">Loading, please wait...</div>
+               <table id="table" data-search="true" data-sort-name="time" data-row-style="rowStyle" data-sort-order="desc" class="table table-hover">
+                  <thead class="bg-blue">
+                     <tr>
+                        <th style="text-align: center; width: 15%; " data-field="date">
+                           <div class="th-inner sortable both">Date/Time</div>
+                           <div class="fht-cell"></div>
+                        </th>
+                        <th style="text-align: center; width: 8%; " data-field="time">
+                           <div class="th-inner sortable both desc">Parameter</div>
+                           <div class="fht-cell"></div>
+                        </th>
+                        <th style="text-align: center; " data-field="alarm">
+                           <div class="th-inner sortable both">Devices</div>
+                           <div class="fht-cell"></div>
+                        </th>
+                        <th style="text-align: center; " data-field="value">
+                           <div class="th-inner sortable both">Value</div>
+                           <div class="fht-cell"></div>
+                        </th>
+                        <th style="text-align: center; " data-field="severity">
+                           <div class="th-inner sortable both">Alarm status</div>
+                           <div class="fht-cell"></div>
+                        </th>
+                        <th style="text-align: center; " data-field="status">
+                           <div class="th-inner sortable both">Desc</div>
+                           <div class="fht-cell"></div>
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr class="" data-index="0" id="detailbar">
+                        <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                        <td style="text-align: center; width: 8%; ">0E-7</td>
+                        <td style="">TX A Vision</td>
+                        <td style="">18 Kw</td>
+                        <td style=""><span class="label A">NORMAL</span></td>
+                        <td style="">Clear</td>
+                     </tr>
+                      <tr class="" data-index="0" id="detailbar">
+                        <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                        <td style="text-align: center; width: 8%; ">0E-7</td>
+                        <td style="">TX A Vision</td>
+                        <td style="">18 Kw</td>
+                        <td style=""><span class="label C">MAJOR</span></td>
+                        <td style="">Active</td>
+                     </tr>
+                      <tr class="" data-index="0" id="detailbar">
+                        <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                        <td style="text-align: center; width: 8%; ">0E-7</td>
+                        <td style="">TX A Vision</td>
+                        <td style="">18 Kw</td>
+                        <td style=""><span class="label E">CRITICAL</span></td>
+                        <td style="">Active</td>
+                     </tr>
+                       <tr class="" data-index="0" id="detailbar">
+                        <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                        <td style="text-align: center; width: 8%; ">0E-7</td>
+                        <td style="">TX A Vision</td>
+                        <td style="">18 Kw</td>
+                        <td style=""><span class="label C">MAJOR</span></td>
+                        <td style="">Active</td>
+                     </tr>
+                     <tr class="" data-index="0" id="detailbar">
+                        <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                        <td style="text-align: center; width: 8%; ">0E-7</td>
+                        <td style="">TX A Vision</td>
+                        <td style="">18 Kw</td>
+                        <td style=""><span class="label A">NORMAL</span></td>
+                        <td style="">Clear</td>
+                     </tr>
+                      <tr class="" data-index="0" id="detailbar">
+                        <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                        <td style="text-align: center; width: 8%; ">0E-7</td>
+                        <td style="">TX A Vision</td>
+                        <td style="">18 Kw</td>
+                        <td style=""><span class="label C">MAJOR</span></td>
+                        <td style="">Active</td>
+                     </tr>
+                      <tr class="" data-index="0" id="detailbar">
+                        <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                        <td style="text-align: center; width: 8%; ">0E-7</td>
+                        <td style="">TX A Vision</td>
+                        <td style="">18 Kw</td>
+                        <td style=""><span class="label A">NORMAL</span></td>
+                        <td style="">Clear</td>
+                     </tr>
+                      <tr class="" data-index="0" id="detailbar">
+                        <td style="text-align: center; width: 15%; ">3-Aug-18, 21:00</td>
+                        <td style="text-align: center; width: 8%; ">0E-7</td>
+                        <td style="">TX A Vision</td>
+                        <td style="">18 Kw</td>
+                        <td style=""><span class="label C">MAJOR</span></td>
+                        <td style="">Active</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div class="slimScrollBar" style="background: rgb(52, 152, 219); width: 4px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 337px;"></div>
+            <div class="slimScrollRail" style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+         </div>
+         <div class="fixed-table-footer" style="display: none;">
+            <table>
+               <tbody>
+                  <tr></tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="fixed-table-pagination" style="display: none;"></div>
+      </div>
+   </div>
+   <div class="clearfix"></div>
+</div>
+      </div>
+   </div>
+    </div>
+  </div>
+</div>
+  <!-- END HISTORY GRUP -->
+  
+  
+</template>

@@ -1,0 +1,185 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 28/07/2017 16:30
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-cctv:before { content: "\f100"; }
+.flaticon-data-network:before { content: "\f101"; }
+.flaticon-technology-8:before { content: "\f102"; }
+.flaticon-transmission-tower:before { content: "\f103"; }
+.flaticon-technology-7:before { content: "\f104"; }
+.flaticon-computer-cpu:before { content: "\f105"; }
+.flaticon-signal-reception-button:before { content: "\f106"; }
+.flaticon-parabolic-antenna-1:before { content: "\f107"; }
+.flaticon-radio-tower-1:before { content: "\f108"; }
+.flaticon-satellite-dish-8:before { content: "\f109"; }
+.flaticon-satellite-dish-7:before { content: "\f10a"; }
+.flaticon-alarm:before { content: "\f10b"; }
+.flaticon-tower-with-signal-emission:before { content: "\f10c"; }
+.flaticon-signal-tower-symbol-1:before { content: "\f10d"; }
+.flaticon-connection-2:before { content: "\f10e"; }
+.flaticon-satellite-dish-6:before { content: "\f10f"; }
+.flaticon-broadcast-communications-tower:before { content: "\f110"; }
+.flaticon-wifi:before { content: "\f111"; }
+.flaticon-antenna-5:before { content: "\f112"; }
+.flaticon-satellite-dish-silhouette:before { content: "\f113"; }
+.flaticon-strength-3:before { content: "\f114"; }
+.flaticon-media-signal-tower:before { content: "\f115"; }
+.flaticon-strength-2:before { content: "\f116"; }
+.flaticon-satellite-dish-5:before { content: "\f117"; }
+.flaticon-radar-dish:before { content: "\f118"; }
+.flaticon-antenna-with-signal:before { content: "\f119"; }
+.flaticon-technology-6:before { content: "\f11a"; }
+.flaticon-satellite-dish-4:before { content: "\f11b"; }
+.flaticon-technology-5:before { content: "\f11c"; }
+.flaticon-danger:before { content: "\f11d"; }
+.flaticon-antenna-4:before { content: "\f11e"; }
+.flaticon-antenna-3:before { content: "\f11f"; }
+.flaticon-antenna-2:before { content: "\f120"; }
+.flaticon-antenna-1:before { content: "\f121"; }
+.flaticon-antenna:before { content: "\f122"; }
+.flaticon-technology-4:before { content: "\f123"; }
+.flaticon-symbols:before { content: "\f124"; }
+.flaticon-wireless:before { content: "\f125"; }
+.flaticon-technology-3:before { content: "\f126"; }
+.flaticon-cell-tower:before { content: "\f127"; }
+.flaticon-satellite-tv-dish:before { content: "\f128"; }
+.flaticon-parabolic-dish-with-signal:before { content: "\f129"; }
+.flaticon-technology-2:before { content: "\f12a"; }
+.flaticon-radio-tower:before { content: "\f12b"; }
+.flaticon-satellite-dish-2:before { content: "\f12c"; }
+.flaticon-siren-light:before { content: "\f12d"; }
+.flaticon-satellite-dish-1:before { content: "\f12e"; }
+.flaticon-technology-1:before { content: "\f12f"; }
+.flaticon-symbols-4:before { content: "\f130"; }
+.flaticon-frequency-antenna:before { content: "\f131"; }
+.flaticon-signal-1:before { content: "\f132"; }
+.flaticon-tower-transmissions:before { content: "\f133"; }
+.flaticon-wifi-signal-tower:before { content: "\f134"; }
+.flaticon-wifi-signal:before { content: "\f135"; }
+.flaticon-parabolic-antenna:before { content: "\f136"; }
+.flaticon-satellite-dish:before { content: "\f137"; }
+.flaticon-technology:before { content: "\f138"; }
+.flaticon-signal:before { content: "\f139"; }
+.flaticon-connection-1:before { content: "\f13a"; }
+.flaticon-signal-tower-symbol:before { content: "\f13b"; }
+.flaticon-symbols-3:before { content: "\f13c"; }
+.flaticon-strength-1:before { content: "\f13d"; }
+.flaticon-wifi-medium-signal-symbol:before { content: "\f13e"; }
+.flaticon-connection:before { content: "\f13f"; }
+.flaticon-symbols-2:before { content: "\f140"; }
+.flaticon-antenna-with-signal-lines-symbol:before { content: "\f141"; }
+.flaticon-tool-1:before { content: "\f142"; }
+.flaticon-symbols-1:before { content: "\f143"; }
+.flaticon-strength:before { content: "\f144"; }
+.flaticon-wifi-signal-symbol:before { content: "\f145"; }
+.flaticon-wifi-full-signal-interface-symbol:before { content: "\f146"; }
+.flaticon-tool:before { content: "\f147"; }
+.flaticon-satellite-dish-3:before { content: "\f148"; }
+    
+    $font-Flaticon-cctv: "\f100";
+    $font-Flaticon-data-network: "\f101";
+    $font-Flaticon-technology-8: "\f102";
+    $font-Flaticon-transmission-tower: "\f103";
+    $font-Flaticon-technology-7: "\f104";
+    $font-Flaticon-computer-cpu: "\f105";
+    $font-Flaticon-signal-reception-button: "\f106";
+    $font-Flaticon-parabolic-antenna-1: "\f107";
+    $font-Flaticon-radio-tower-1: "\f108";
+    $font-Flaticon-satellite-dish-8: "\f109";
+    $font-Flaticon-satellite-dish-7: "\f10a";
+    $font-Flaticon-alarm: "\f10b";
+    $font-Flaticon-tower-with-signal-emission: "\f10c";
+    $font-Flaticon-signal-tower-symbol-1: "\f10d";
+    $font-Flaticon-connection-2: "\f10e";
+    $font-Flaticon-satellite-dish-6: "\f10f";
+    $font-Flaticon-broadcast-communications-tower: "\f110";
+    $font-Flaticon-wifi: "\f111";
+    $font-Flaticon-antenna-5: "\f112";
+    $font-Flaticon-satellite-dish-silhouette: "\f113";
+    $font-Flaticon-strength-3: "\f114";
+    $font-Flaticon-media-signal-tower: "\f115";
+    $font-Flaticon-strength-2: "\f116";
+    $font-Flaticon-satellite-dish-5: "\f117";
+    $font-Flaticon-radar-dish: "\f118";
+    $font-Flaticon-antenna-with-signal: "\f119";
+    $font-Flaticon-technology-6: "\f11a";
+    $font-Flaticon-satellite-dish-4: "\f11b";
+    $font-Flaticon-technology-5: "\f11c";
+    $font-Flaticon-danger: "\f11d";
+    $font-Flaticon-antenna-4: "\f11e";
+    $font-Flaticon-antenna-3: "\f11f";
+    $font-Flaticon-antenna-2: "\f120";
+    $font-Flaticon-antenna-1: "\f121";
+    $font-Flaticon-antenna: "\f122";
+    $font-Flaticon-technology-4: "\f123";
+    $font-Flaticon-symbols: "\f124";
+    $font-Flaticon-wireless: "\f125";
+    $font-Flaticon-technology-3: "\f126";
+    $font-Flaticon-cell-tower: "\f127";
+    $font-Flaticon-satellite-tv-dish: "\f128";
+    $font-Flaticon-parabolic-dish-with-signal: "\f129";
+    $font-Flaticon-technology-2: "\f12a";
+    $font-Flaticon-radio-tower: "\f12b";
+    $font-Flaticon-satellite-dish-2: "\f12c";
+    $font-Flaticon-siren-light: "\f12d";
+    $font-Flaticon-satellite-dish-1: "\f12e";
+    $font-Flaticon-technology-1: "\f12f";
+    $font-Flaticon-symbols-4: "\f130";
+    $font-Flaticon-frequency-antenna: "\f131";
+    $font-Flaticon-signal-1: "\f132";
+    $font-Flaticon-tower-transmissions: "\f133";
+    $font-Flaticon-wifi-signal-tower: "\f134";
+    $font-Flaticon-wifi-signal: "\f135";
+    $font-Flaticon-parabolic-antenna: "\f136";
+    $font-Flaticon-satellite-dish: "\f137";
+    $font-Flaticon-technology: "\f138";
+    $font-Flaticon-signal: "\f139";
+    $font-Flaticon-connection-1: "\f13a";
+    $font-Flaticon-signal-tower-symbol: "\f13b";
+    $font-Flaticon-symbols-3: "\f13c";
+    $font-Flaticon-strength-1: "\f13d";
+    $font-Flaticon-wifi-medium-signal-symbol: "\f13e";
+    $font-Flaticon-connection: "\f13f";
+    $font-Flaticon-symbols-2: "\f140";
+    $font-Flaticon-antenna-with-signal-lines-symbol: "\f141";
+    $font-Flaticon-tool-1: "\f142";
+    $font-Flaticon-symbols-1: "\f143";
+    $font-Flaticon-strength: "\f144";
+    $font-Flaticon-wifi-signal-symbol: "\f145";
+    $font-Flaticon-wifi-full-signal-interface-symbol: "\f146";
+    $font-Flaticon-tool: "\f147";
+    $font-Flaticon-satellite-dish-3: "\f148";

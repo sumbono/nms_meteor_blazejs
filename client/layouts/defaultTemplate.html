@@ -1,0 +1,19 @@
+<template name="defaultTemplate">
+    <!-- {{#if currentRouteIs 'loginIndex'}}
+        {{>loginIndex}}
+    {{else}}
+        {{#if currentRoute}}
+            <div class="wrapper">
+            	{{>header}}
+                {{>Template.dynamic template=currentRoute }}
+            </div>
+        {{else}}
+            {{>notFound}}
+        {{/if}}
+    {{/if}} -->
+    <div class="wrapper">
+        {{>yield "top"}}
+        {{>yield "sidebar-menu"}}
+        {{>yield}}
+    </div>
+</template>

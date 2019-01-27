@@ -1,0 +1,54 @@
+<template name="header">
+    <header class="main-header">
+        <a href="#" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><img src="" class="img img-responsive" style="height: 55px; text-align: center;margin: auto;" /></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><img src="" class="img img-responsive" style="width: 79px; text-align: center;margin: auto;" /></span>
+        </a>
+        <nav class="navbar">
+            <div class="collapse navbar-collapse pull-right main-menu normal" id="navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="{{#if currentRouteIs 'dashboardIndex'}}active{{/if}}"><a href="{{pathFor 'dashboardIndex'}}">Dashboard</a></li>
+                    <li class="{{#if currentRouteIs 'reportIndex'}}active{{/if}}"><a href="{{pathFor 'reportIndex'}}">Report</a></li>
+                    {{#if notEquals userName 'guest'}}
+                      <li class="{{#if currentRouteIs 'settingIndex'}}active{{/if}}">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="">Setting
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="{{pathFor 'userManagement'}}">User Management</a></li>
+                          <li><a href="{{pathFor 'stationIndex'}}">Station</a></li>
+                        </ul>
+                      </li>
+                    {{/if}}
+                    
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              <img src="/asset/dist/img/avatar5.png" class="user-image" alt="User Image">
+                              <span class="hidden-xs">{{userName}}</span>
+                            </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="/asset/dist/img/avatar5.png" class="img-circle" alt="User Image">
+
+                                <p>
+                                    {{userName}}
+                                </p>
+                            </li>
+                            <!-- Menu Body -->
+
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                </div>
+                                <div class="pull-right">
+                                    <a href="#" id="logout" class="btn btn-default btn-flat">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+</template>

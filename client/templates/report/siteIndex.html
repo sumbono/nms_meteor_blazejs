@@ -1,0 +1,507 @@
+<!--  -->
+<template name="siteIndex">
+  
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    
+    <style>
+        .progress-group .progress-text {font-weight: 300;}
+        .quick-list.door-sensor li {padding-top: 10px;}
+        table.device-info tr td {border-bottom-color: #a5a5a5 !important;}
+        table.device-info tr td:first-child {padding-left: 25px;}
+        table.device-info tr:last-child td {border-bottom-color: none;}
+        .box-header .box-title {font-size: 22px;}
+        .equipment>li:hover {cursor: pointer;background-color: #f4f4f4;}
+        .equipment li.active {background-color: #f4f4f4;}
+        #mybarChart {height: 150px !important;}
+        .modal-body .sidebar-menu li>a>.pull-right-container {top: inherit;}
+        .modal-body .sidebar-menu li>a {color: #5A738E !important;}
+        .modal-body .sidebar-menu>li>.treeview-menu {background: #efefef;}
+        .pagination-detail {display: none;}
+        .pagination {font-size: 11px;}
+      
+        /* style for camera template */
+        .slide_image {
+          display: flex;
+          min-width: 100%;
+          min-height: 150px;
+          overflow-y: hidden;
+          overflow-x: auto;
+          padding-bottom: 20px;
+        }
+
+        .slide_image::-webkit-scrollbar {
+          /*display: none;*/
+          width: 20px;
+          height: 5px;
+        }
+        .img_slide {
+          /*background-color: #e74c3c;*/
+          min-width: 200px;
+          margin: 5px;
+          box-shadow: 3px 5px rgba(255,255,255,0.05);
+          padding-top: 10px;
+        }
+
+        .img_slide img {
+          border:6px solid gray;
+          width: 100%;
+          height: 100%;
+        }
+        .judul_img{
+            color: black;
+            /* font-weight: bold; */
+            font-size: 10px;
+            /* position: absolute; */
+            top: 0px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 200px;
+            overflow: hidden;
+        }
+        /* Track */
+        .slide_image::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey; 
+            border-radius: 10px;
+        }
+         
+        /* Handle */
+        .slide_image::-webkit-scrollbar-thumb {
+            background: #d0d0d0; 
+            border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        .slide_image::-webkit-scrollbar-thumb:hover {
+            background: gray; 
+        }
+        
+  .sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: yellow;
+    padding: 20px;
+    font-size: 20px;
+}
+      
+      
+    </style>
+    </head>
+    <!-- Content Header (Page header) Start -->
+    <section class="content-header">
+        <!-- <h1>Report {{name}}<small> Based On a Site Area</small> -->
+   
+      <h1>Report {{name}}</h1>
+<!--       <div class="sticky"><h2>Report {{name}}</h2></div> -->
+  
+      
+      
+        <!-- kanan atas, bawah user -->
+        <ol class="breadcrumb">
+            <li><a href=""><i class="fa fa-dashboard"></i> Current menu</a></li>
+            <li class="active">Report {{name}}</li>
+        </ol>
+  </section>
+    <!-- Content Header (Page header) Finish -->
+    <!-- Content Box Start -->
+    <section class="content">
+      
+      {{#if sensorsLoading}}
+        <div class="row">
+            <!-- susunan device category di content box, sidebar, & list databar : start -->
+            {{#each device_category_id in data_site_device_category _id}}
+                {{#each devcat in data_device_category device_category_id}}
+          
+            <!-- template battery: Start -->
+                    {{#if equals devcat.name 'Battery'}}
+          
+                        
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div_device_right" id="div_{{device_category_id}}">
+                          <div class="box box-solid">
+                            
+                            <div class="box-header with-border">
+                              <h2 class="box-title">{{devcat.name}}</h2>
+                              <span class="badge badge-info description pull-right">{{name}}</span>
+                            </div>
+                            
+                            {{#each sitedev in data_site_devices device_category_id=devcat._id site_id=_id}}
+                              {{#each counterStatus site_id=_id device_id=sitedev._id}}
+                                {{#each sitedevice in data_site_devicesAll site_id=_id device_id=sitedev._id}}
+                                    
+                                    <div class="box-body">
+                                      <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                          <div class="user-block">
+                                              <h1 class="pull-left" style="margin: 0;padding-left: 14px;padding-right: 14px;margin-top: 3px;"><i class="fa fa-battery-three-quarters text-blue"></i></h1>
+                                              <span class="username"> {{sitedevice.title}} </span>
+                                              <span class="description"> {{sitedevice.title2}} </span>
+                                          </div>
+                                          <div class="panel-heading" style="color: #ff4500; font-weight: bold;">
+                                              <h6><i class="glyphicon glyphicon-oil"></i>&nbsp;Overall Status</h6>
+                                          </div>
+                                          <div class="row">
+                                            <!-- CHARTGAUGE: Start -->
+                                            <div class="col-md-3">
+                                              <div id="echart_gauge" data-deviceid="{{sitedevice.dev_id}}" data-cat= "Voltage"
+                                                  style="height:200px;">{{showgaugechart}}</div>
+                                            </div>
+                                            <div class="col-md-3">
+                                              <div id="echart_gauge" data-deviceid="{{sitedevice.dev_id}}" data-cat= "Cell Temperature"
+                                                  style="height:200px;">{{showgaugechart}}</div>
+                                            </div>
+                                            <div class="col-md-3">
+                                              <div id="echart_gauge" data-deviceid="{{sitedevice.dev_id}}" data-cat= "Internal Resistance"
+                                                  style="height:200px;">{{showgaugechart}}</div>
+                                            </div>
+                                            <div class="col-md-3">
+                                              <div id="echart_gauge" data-deviceid="{{sitedevice.dev_id}}" data-cat= "State of Charge (SoC)"
+                                                  style="height:200px;">{{showgaugechart}}</div>
+                                            </div>
+                                            <!-- CHARTGAUGE: Finish. -->
+                                          </div>
+                                          {{#if batteryLoading}}
+                                            <div class="row">
+                                              <div class="col-lg-12">
+                                                <div class="panel panel-default">
+                                                  <div class="panel-heading" style="color: #ff4500; font-weight: bold;">
+                                                      <h6><i class="glyphicon glyphicon-oil"></i>&nbsp;Individual Cell Status</h6>
+                                                  </div>
+                                                  <div class="panel-body" >
+                                                    <canvas id="mybarChart" data-deviceid="{{sitedevice.dev_id}}">{{createChart}}</canvas>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            {{else}}
+                                              <div class="row">
+                                                <div class="col-lg-12">
+                                                  <div class="panel panel-default">
+                                                    <div style="text-align: center; padding-top: 10px;">Collecting data... 
+                                                      <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom fa-spin" style="font-size:24px;color:blue"></i>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                          {{/if}}
+                                          
+                                        </div>
+                                      </div>
+                                    </div>
+                            
+                                {{/each}}
+                              {{/each}}          
+                            {{/each}}
+                            
+                          </div>
+                        </div>
+                        
+                    {{else}}
+            <!-- template battery: Finish -->
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div_device_right" id="div_{{device_category_id}}">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                              <h2 class="box-title">{{devcat.name}}</h2>
+                              <span class="badge badge-info description pull-right">{{name}}</span>
+                            </div>
+                        <div class="box-body">
+            <!-- susunan device category di content box, sidebar, & list databar : finish -->
+<!-- susunan device per device category di content box if parameter size <= numShow : start -->
+<div class="row" style="margin-bottom: 30px;">
+{{#each sitedev in data_site_devices device_category_id=devcat._id site_id=_id}}
+    {{#each counterStatus site_id=_id device_id=sitedev._id}}
+        {{#if equals statusLink 'unlink'}}
+  
+<!-- template camera: Start -->
+        {{#if equals sitedev.name 'Camera'}}
+            <ul class="products-list product-list-in-box">
+                {{#each sitedevice in data_site_devicesAll site_id=_id device_id=sitedev._id}}
+                    {{#each devsensor in data_site_device_sensor dev_id=sitedevice.dev_id is_show=true}}
+                      <ul class="products-list product-list-in-box">
+                        <li class="item" style="padding-bottom: 0; border-bottom: none;">
+                          
+                            <div class="user-block">
+                                <h1 class="pull-left" style="margin: 0;padding-left: 14px;padding-right: 14px;margin-top: 3px;"><i class="fa flaticon-cctv text-blue"></i></h1>
+                                <span class="username">{{devsensor.description}}</span>
+                                <span class="description">{{devsensor.dev_id}}</span>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                  <div class="row">
+                                    <div class="col-lg-12">
+<!--                                         {{#if cameraLoading}} -->
+                                          <div class="slide_image">
+                                            {{#each listCamera dev_id=devsensor.dev_id}}
+                                              <a href="http://nms.scm.co.id/camera/{{dev_ids}}/{{year}}/{{file}}" data-title="{{date}}" data-lightbox="gallery1" class="img_slide">
+                                                <div class="judul_img">{{date}}</div>
+                                                <img  src="http://nms.scm.co.id/camera/{{dev_ids}}/{{year}}/{{file}}" alt=""/>
+                                              </a>
+                                            {{/each}}
+                                          </div>
+<!--                                           {{else}}
+                                          <div style="text-align: center; padding-top: 10px;">Collecting data... 
+                                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom fa-spin" style="font-size:24px;color:blue"></i>
+                                          </div>
+                                        {{/if}} -->
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </li>
+                      </ul>
+                    {{/each}}
+                {{/each}}
+            </ul>  
+   
+        {{else}}
+<!-- template camera: Finish -->
+  
+        <div class="col-lg-{{colSize}} col-md-{{colSize}} col-sm-12 col-xs-12">
+            {{>deviceHeader sitedev}}
+            <ul class="products-list product-list-in-box">
+                {{#each sitedevice in data_site_devicesAll site_id=_id device_id=sitedev._id}}
+                    {{#each devsensor in data_site_device_sensor dev_id=sitedevice.dev_id is_show=true}}        
+                        {{#each protocol in data_protocol devsensor.protocol_id}}
+                        <li class="item" id="targetelement" data-devid="{{sitedevice.dev_id}}" style="padding-bottom: 0; border-bottom: none;">
+                          
+                          <!-- Door Sensor Value: Start -->
+                            {{#if equals devsensor.sensor_view 'label'}}
+                                <span class="text pull-left">{{devsensor.description}}</span>
+                                <div class="tools pull-right" style="display: inline-block" data-protocol="{{protocol.protocol}}" data-unit="{{devsensor.unit}}">
+                                    <small class="label label-{{devsensor.colour}}" style="font-size: 85%;">{{devsensor.condition}}</small>
+                                </div>
+                          <!-- Door Sensor Value: Finish -->
+                            {{/if}}
+                          
+                          <!-- ================================================================================================================================ -->
+                          {{#if equals devsensor.sensor_view 'progress'}}
+                                {{#if equals numShow 1}}
+                                    <div class="product-img">
+                                        <span style="font-size: 59px;line-height: 0.85;" class="text-{{devsensor.colour}}">|</span>
+                                    </div>
+                                    <div class="product-info" style="margin-left: 0;">
+                                        <div class="progress-group" id="group_nama_device" data-protocol="{{protocol.protocol}}" data-unit="{{devsensor.unit}}">
+                                            <span class="progress-text title" id="nama_device">{{sitedevice.title}} - {{devsensor.sensor_name}}</span>
+                                            <span class="progress-number">
+                                                <button class="btn btn-xs btn-link" style="margin: 0; border: 0; line-height: normal;"><i id="dd_detail" class="fa fa-line-chart text-yellow"></i></button>
+                                            </span>
+                                            <div class="progress" style="margin-bottom: 0; background-color: #d0d0d0;">
+                                                <div class="progress-bar progress-bar-{{devsensor.colour}} text-right" role="progressbar" style="min-width: 0; text-align: right; width: {{devsensor.persent}}%">{{devsensor.valueNow}}&nbsp;</div>
+                                            </div>
+                                            <span class="progress-text min-vol" style="font-size: 12px;">{{devsensor.value_min}}<font class="text-red">&nbsp;Low</font></span>
+                                            <span class="progress-number max-vol" style="font-size: 12px;">{{devsensor.value_max}}&nbsp;{{devsensor.unit}}</span>
+                                        </div>
+                                    </div>
+                                  {{/if}}
+                                  
+                                  {{#if notEquals numShow 1}}
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="product-img">
+                                            <span style="font-size: 59px;line-height: 0.85;" class="text-{{devsensor.colour}}">|</span>
+                                        </div>
+                                        <div class="product-info" style="margin-left: 0;">
+                                            <div class="progress-group"  id="group_nama_device" data-protocol="{{protocol.protocol}}" data-unit="{{devsensor.unit}}">
+                                                <span class="progress-text title" id="nama_device">{{sitedevice.title}} - {{devsensor.sensor_name}}</span>
+                                                <span class="progress-number">
+                                                    <button class="btn btn-xs btn-link" style="margin: 0; border: 0; line-height: normal;"><i id="dd_detail" class="fa fa-line-chart text-yellow"></i></button>
+                                                </span>
+                                                <div class="progress" style="margin-bottom: 0; background-color: #d0d0d0;">
+                                                    <div class="progress-bar progress-bar-{{devsensor.colour}} text-right" role="progressbar" style="min-width: 0; text-align: right; width: {{devsensor.persent}}%">{{devsensor.valueNow}}&nbsp;</div>
+                                                </div>
+                                                <span class="progress-text min-vol" style="font-size: 12px;">{{devsensor.value_min}}<font class="text-red">&nbsp;Low</font></span>
+                                                <span class="progress-number max-vol" style="font-size: 12px;">{{devsensor.value_max}}&nbsp;{{devsensor.unit}}</span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                  {{/if}}
+                            {{/if}}
+                            <!-- ================================================================================================================================ -->
+                            
+                        </li>
+                        {{/each}}
+                    {{/each}}
+                {{/each}}
+            </ul>
+        </div>
+            {{/if}}
+        {{/if}}
+    {{/each}}
+{{/each}}
+</div>
+<!-- susunan device per device category di content box if parameter size < numShow : finish -->
+                          
+<!-- susunan device per device category di content box if parameter size > numShow : start -->
+{{#each sitedev in data_site_devices device_category_id=devcat._id site_id=_id}}
+    {{#each counterStatus site_id=_id device_id=sitedev._id}}
+    {{#if equals statusLink 'link'}}
+        <div class="row" style="margin-bottom: 30px;">
+            <div class="col-lg-{{colSize}} col-md-{{colSize}} col-sm-12 col-xs-12">
+                {{>deviceHeader sitedev}}
+                <ul class="products-list product-list-in-box equipment">
+                    
+                    <!-- susunan device per device category di content box yang Show : start -->
+                    {{#if equals numShow 1}}
+                    {{#each sitedevice in data_site_devicesAll site_id=_id device_id=sitedev._id}}
+                        {{#each devsensor in data_site_device_sensor dev_id=sitedevice.dev_id is_show=true}}
+                            {{#each protocol in data_protocol devsensor.protocol_id}}
+                                <li class="item" id="targetelement" data-devid="{{sitedevice.dev_id}}" style="padding-bottom: 0; border-bottom: none;">
+                                    <div class="product-img">
+                                        <span style="font-size: 59px;line-height: 0.85;" class="text-{{devsensor.colour}}">|</span>
+                                    </div>
+                                    <div class="product-info" style="margin-left: 0;">
+                                        <div class="progress-group"  id="group_nama_device" data-protocol="{{protocol.protocol}}" data-unit="{{devsensor.unit}}">
+                                            <span class="progress-text title" id="nama_device">{{sitedevice.title}} - {{devsensor.sensor_name}}</span>
+                                            <span class="progress-number" >
+                                                <button class="btn btn-xs btn-link" style="margin: 4; border: 0; line-height: normal;"><i id="dd_detail" class="fa fa-line-chart text-yellow"></i></button>
+                                            </span>
+                                            <!-- ProgressBar Sensor Value Now is Here : start -->
+                                            <div class="progress" style="margin-bottom: 0; background-color: #d0d0d0;">
+                                                <div class="progress-bar progress-bar-{{devsensor.colour}} text-right" role="progressbar" style="min-width: 0; text-align: right; width: {{devsensor.persent}}%">{{devsensor.valueNow}}&nbsp;</div>
+                                            </div>
+                                            <!-- ProgressBar Sensor Value Now is Here : finish -->
+
+                                            <span class="progress-text min-vol" style="font-size: 12px;">{{devsensor.value_min}}<font class="text-red">&nbsp;Low</font></span>
+                                            <span class="progress-number max-vol" style="font-size: 12px;">{{devsensor.value_max}}&nbsp;{{devsensor.unit}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        {{/each}}
+                    {{/each}}
+                    {{/if}}
+                    <!-- susunan device per device category di content box yang Show : finish -->
+                    <!-- susunan device per device category di content box yang not Show : start -->
+                    {{#if notEquals numShow 1}}
+                    {{#each sitedevice in data_site_devicesAll site_id=_id device_id=sitedev._id}}
+                      <li class="item" id="targetelement" data-devid="{{sitedevice.dev_id}}" style="padding-bottom: 0; border-bottom: none;">
+                          <div class="row">
+                          {{#each devsensor in data_site_device_sensor dev_id=sitedevice.dev_id is_show=true}}
+                              {{#each protocol in data_protocol devsensor.protocol_id}}
+                                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                  <div class="product-img">
+                                      <span style="font-size: 59px;line-height: 0.85;" class="text-{{devsensor.colour}}">|</span>
+                                  </div>
+                                  <div class="product-info" style="margin-left: 0;">
+                                      <div class="progress-group"  id="group_nama_device" data-protocol="{{protocol.protocol}}" data-unit="{{devsensor.unit}}">
+                                          <span class="progress-text title" id="nama_device">{{sitedevice.title}} - {{devsensor.sensor_name}}</span>
+                                          <span class="progress-number">
+                                              <button class="btn btn-xs btn-link" style="margin: 0; border: 0; line-height: normal;"><i id="dd_detail" class="fa fa-line-chart text-yellow"></i></button>
+                                          </span>
+                                          <!-- ProgressBar Sensor Value Now is Here : start -->
+                                          <div class="progress" style="margin-bottom: 0; background-color: #d0d0d0;">
+                                              <div class="progress-bar progress-bar-{{devsensor.colour}} text-right" role="progressbar" style="min-width: 0; text-align: right; width: {{devsensor.persent}}%">{{devsensor.valueNow}}&nbsp;</div>
+                                          </div>
+                                          <!-- ProgressBar Sensor Value Now is Here : finish -->
+
+                                          <span class="progress-text min-vol" style="font-size: 12px;">{{devsensor.value_min}}<font class="text-red">&nbsp;Low</font></span>
+                                          <span class="progress-number max-vol" style="font-size: 12px;">{{devsensor.value_max}}&nbsp;{{devsensor.unit}}</span>
+                                      </div>
+                                  </div>
+                                  </div>
+                            {{/each}}
+                        {{/each}}
+                        </div>
+                      </li>
+                    {{/each}}
+                    {{/if}}
+                    <!-- susunan device per device category di content box yang not Show : finish -->
+<!--                   {{/if}} -->
+                  
+                </ul>
+            </div>
+
+            <!-- START DETAIL SENSOR After clicked-->
+                {{#each sitedevice in data_site_devicesAll device_id=sitedev._id}}
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" data-devid="{{sitedevice.dev_id}}" id="detailPower" style="display: none;">
+                    <div class="user-block">
+                        <h1 class="pull-left" style="margin: 0;padding-left: 14px;padding-right: 14px;margin-top: 3px;"><i class="{{sitedev.icon}} text-blue"></i></h1>
+                        <span class="username">{{sitedevice.title}}</span>
+                        <span class="description">Detail Information</span>
+                    </div>
+
+                    <ul class="products-list product-list-in-box equipment">
+                        {{#each devsensor in data_site_device_sensor dev_id=sitedevice.dev_id}}
+                            {{#each protocol in data_protocol devsensor.protocol_id}}
+                              <li class="item" id="targetelement" data-devid="{{sitedevice.dev_id}}" style="padding-bottom: 0; border-bottom: none;">
+                                  <div class="product-img">
+                                      <span style="font-size: 59px;line-height: 0.85;" class="text-{{devsensor.colour}}">|</span>
+                                  </div>
+                                  <div class="product-info" style="margin-left: 0;">
+                                      <div class="progress-group"  id="group_nama_device" data-protocol="{{protocol.protocol}}" data-unit="{{devsensor.unit}}">
+                                          <span class="progress-text title" id="nama_device">{{devsensor.sensor_name}}</span>
+                                          <span class="progress-number">
+                                              <button class="btn btn-xs btn-link" style="margin: 0; border: 0; line-height: normal;"><i id="dd_detail" class="fa fa-line-chart text-yellow"></i></button>
+                                          </span>
+                                          <!-- ProgressBar Sensor Value Now is Here : start -->
+                                          <div class="progress" style="margin-bottom: 0; background-color: #d0d0d0;">
+                                              <div class="progress-bar progress-bar-{{devsensor.colour}} text-right" role="progressbar" style="min-width: 0; text-align: right; width: {{devsensor.persent}}%">{{devsensor.valueNow}}&nbsp;</div>
+                                          </div>
+                                          <!-- ProgressBar Sensor Value Now is Here : finish -->
+
+                                          <span class="progress-text min-vol" style="font-size: 12px;">{{devsensor.value_min}}<font class="text-red">&nbsp;Low</font></span>
+                                          <span class="progress-number max-vol" style="font-size: 12px;">{{devsensor.value_max}}&nbsp;{{devsensor.unit}}</span>
+                                      </div>
+                                  </div>
+                              </li>
+                            {{/each}}
+                        {{/each}}
+                    </ul>
+                  
+                </div>
+                {{/each}}
+            <!-- END DETAIL SENSOR -->
+
+
+        </div>
+      {{/if}}
+    {{/each}}
+{{/each}}
+<!-- susunan device per device category di content box if parameter size > numShow : finish -->
+
+
+
+                              </div>
+                          </div>
+                      </div>
+                    {{/if}}
+                  <!-- end of if Battery -->
+                  
+                {{/each}}
+            {{/each}}
+        </div>
+      
+        {{else}}
+        <div style="text-align: center; padding-top: 10px;">Collecting data... 
+          <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom fa-spin" style="font-size:24px;color:blue"></i>
+        </div>
+      {{/if}}
+      
+    </section>
+  
+<!--  grafik history: Start -->
+    <div class="modal fade" id="chartSite" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-aqua color-palette">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    <div id="container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--  grafik history: Finish  -->
+  
+</template>
+
+
+<template name="deviceHeader">
+    <div class="user-block">
+        <h1 class="pull-left" style="margin: 0;padding-left: 14px;padding-right: 14px;margin-top: 3px;"><i class="{{icon}} text-blue"></i></h1>
+        <span class="username">{{name}}</span>
+        <span class="description">{{description}}</span>
+    </div>
+</template>

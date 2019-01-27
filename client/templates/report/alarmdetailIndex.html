@@ -1,0 +1,126 @@
+<template name="alarmdetailIndex">
+  <div class="x_content" style="background:#f9f9f9">
+      <div style="min-height: 93vh;">
+        <section class="content-header">
+        <h1>Alarm Detail</h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Alarm</a></li>
+          <li class="active">Alarm Detail</li>
+        </ol>
+      <div class="box box-solid">
+        {{#each alarm in alarmNational}}        
+        <div style="padding:20px 20px 0px 20px;">
+          <div class="row" >
+            <div class="col-md-6">
+              <table class="table">
+                <tr>
+                  <td>Site </td>
+                  <td> : <strong> {{alarm.Site}}</strong></td>
+<!--                   <td> : <strong>Kebon Jeruk</strong></td> -->
+                 
+                </tr>
+                <tr>
+                  <td>Device </td>
+                  <td> : <strong>{{alarm.Device}}</strong></td>
+                </tr>
+                <tr>
+                  <td>Parameter </td>
+                  <td> : <strong>{{alarm.Parameter}}</strong></td>
+                </tr>
+                <tr>
+                  <td>Value </td>
+                  <td> : <strong>{{alarm.Value}}</strong></td>
+                </tr>
+              </table>
+            </div>
+            <div class="col-md-6">
+              <table class="table table-striped">
+                <tr>
+                  <td>Alarm Date </td>
+                  <td> : <strong>{{alarm.Date}}</strong></td>
+                </tr>
+                <tr>
+                  {{#if equals alarm.Status 'MAJOR_MIN'}}
+                  <td>Alarm Status </td>
+                  <td> : <strong class="label label-warning">{{alarm.Status}}</strong></td>
+                  {{/if}}
+                  {{#if equals alarm.Status 'MAJOR_MAX'}}
+                  <td>Alarm Status </td>
+                  <td> : <strong class="label label-warning">{{alarm.Status}}</strong></td>
+                  {{/if}}
+                  {{#if equals alarm.Status 'CRITICAL_MIN'}}
+                  <td>Alarm Status </td>
+                  <td> : <strong class="label label-danger">{{alarm.Status}}</strong></td>
+                  {{/if}}
+                  {{#if equals alarm.Status 'CRITICAL_MAX'}}
+                  <td>Alarm Status </td>
+                  <td> : <strong class="label label-danger">{{alarm.Status}}</strong></td>
+                  {{/if}}
+                </tr>
+                <tr>
+                  <td>Description </td>
+                  <td> : <strong>-</strong></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+         {{/each}}  
+      </div>
+
+      <div class="box box-solid">
+        <div style="padding:20px 20px 0px 20px;">
+          <div class="box-body">
+           <div class="row" style="margin-bottom: 30px;">
+           {{#each alarm in alarmNational}}
+             {{#each sensor in deviceSensor}}
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                 <div class="user-block">
+                    <h1 class="pull-left" style="margin: 0; padding-left: 14px; padding-right: 14px; margin-top: 3px;">
+                       <i class="fa flaticon-alarm text-blue"></i>
+                    </h1>
+                    <span class="username">{{alarm.Device}}</span>
+                    <span class="description">{{sensor.description}}</span>
+                 </div>
+                 <ul class="products-list product-list-in-box equipment">
+                    <!-- susunan device per device category di content box yang Show : start -->
+                   
+                    <li class="item" id="targetelement" data-devid="330" style="padding-bottom: 0; border-bottom: none;">
+                       <div class="product-img">
+                          <span style="font-size: 59px; line-height: 0.85;" class="text-{{sensor.colour}}">|</span>
+                       </div>
+                       <div class="product-info" style="margin-left: 0;">
+                          <div class="progress-group" id="group_nama_device">
+                             <span class="progress-text title" id="nama_device">{{sensor.sensor_name}}</span>
+                             <!-- <span class="progress-number"><button id="r-detail" class="btn btn-xs btn-link" style="margin: 0; font-size: 11px; line-height: normal;"><i class="fa fa-info-circle text-blue"></i></button><button class="btn btn-xs btn-link" style="margin: 0; border: 0; line-height: normal;"><i id="dd_detail" class="fa fa-line-chart text-yellow"></i></button></span> -->
+                             <!-- ProgressBar Sensor Value Now is Here : start -->
+                             <div class="progress" style="margin-bottom: 0; background-color: #d0d0d0;">
+                                <div class="progress-bar progress-bar-{{sensor.colour}} text-right" role="progressbar" style="min-width: 0; text-align: right; width: {{sensor.persent}}%">{{alarm.Value}}&nbsp;</div>
+                             </div>
+                             <!-- ProgressBar Sensor Value Now is Here : finish -->
+                             <span class="progress-text min-vol" style="font-size: 12px;">{{sensor.value_min}}<font class="text-red">&nbsp;Low</font></span>
+                             <span class="progress-number max-vol" style="font-size: 12px;">{{sensor.value_max}}&nbsp;{{sensor.unit}}</span>
+                          </div>
+                       </div>
+                    </li>
+                    <!-- susunan device per device category di content box yang Show : finish -->
+                    <!-- susunan device per device category di content box yang not Show : start -->
+                    <!-- susunan device per device category di content box yang not Show : finish -->
+                    <!--                   {{/if}} -->
+                 </ul>
+              </div>
+              {{/each}}  
+             {{/each}}
+              <!-- END DETAIL SENSOR -->
+<!--              <div class="col-md-8">
+               <div id="analyzer"></div>
+             </div> -->
+           </div>
+           <!-- susunan device per device category di content box if parameter size > numShow : finish -->
+        </div>
+        </div>
+      </div>
+    </section>
+    </div>
+  </div>
+</template>

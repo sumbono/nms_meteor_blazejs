@@ -1,0 +1,212 @@
+<template name="dashboardIndex">
+	<style type="text/css">
+
+	    .fixed{
+	      background: #D8D8D8;
+	      position: fixed;
+	      width: 100%;
+	      z-index: 1070;
+	      margin-top: -70px;
+	      margin-left: -2px;
+	    }
+	    /* .normal{
+
+	    } */
+	    .sidebar-toggle{
+	        display: none;
+	    }
+	    .x_panel{
+	        position: relative;
+	        width: 100%;
+	        margin-bottom: 10px;
+	        padding: 10px 17px;
+	        display: inline-block;
+	        background: #fff;
+	        border: 1px solid #E6E9ED;
+	        -webkit-column-break-inside: avoid;
+	        -moz-column-break-inside: avoid;
+	        /* column-break-inside: avoid; */
+	        opacity: 1;
+	        transition: all .2s ease;
+	    }
+	    .x_panel, .x_content, .x_content table, .x_content table p, .x_content > div > div, .widget_summary > div > span {
+	        font-size: 13px !important;
+	        font-family: 'Lato','Helvetica' !important;
+	    }
+
+	    .x_title{
+	        border-bottom: 2px solid #E6E9ED;
+	        padding: 1px 5px 6px;
+	        margin-bottom: 10px;
+	    }
+	</style>
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+	<!-- Main content -->
+	<section class="content">
+	    <div class="row row-status">
+	        <div class="col-lg-3 col-xs-6">
+	           <!-- small box -->
+	            <div class="small-box bg-navy">
+	                <div class="inner">
+	               <h3> {{olSite}} </h3>
+	               <p>On-line Station</p>
+	            </div>
+	            <div class="icon">
+                  <i class="fa flaticon-satellite-dish-4" style="font-size: 0.85em; color: white;"></i>
+	            </div>
+	           </div>
+	        </div>
+
+	        <div class="col-lg-3 col-xs-6">
+	          <!-- small box -->
+	            <div class="small-box bg-navy">
+	                <div class="inner">
+	                  <h3> {{olDev}} </h3>
+	                  <p>On-line Devices</p>
+	                </div>
+	            <div class="icon">
+									<i class="icomoon icon-drive" style="font-size: 0.85em; color: white;"></i>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-lg-3 col-xs-6">
+	            <!-- small box -->
+	            <div class="small-box bg-red">
+	              <div class="inner">
+	                <h3> {{criDev}}</h3>
+	                <p>Critical Alarm Devices</p>
+	              </div>
+	              <div class="icon">
+                  <i class="fa flaticon-alarm" style="font-size: 0.85em; color: white;"></i>
+	              </div>
+	            </div>
+	          </div>
+	        <div class="col-lg-3 col-xs-6">
+	          <!-- small box -->
+	          <div class="small-box bg-yellow">
+	            <div class="inner">
+	              <h3> {{majDev}}</h3>
+	              <p>Major Alarm Devices</p>
+	            </div>
+	            <div class="icon">
+	              <i class="icomoon icon-warning" style="font-size: 0.85em; color: white;"></i>
+	            </div>
+	          </div>
+	        </div>
+	    </div>
+
+	    <div class="row row-grid-home">
+              <!-- TX Graph: Start -->
+	            <div class="col-md-12 col-sm-12 col-xs-12">
+
+	                <div class="x_panel">
+	                  <div class="x_content">
+	                   <style type="text/css">
+	                    ul.bar_tabs{
+	                      background: none;
+	                      border-bottom: none;
+	                    }
+
+	                    ul.bar_tabs>li.active{
+	                      border-right: none;
+	                    }
+
+	                    .nav-tabs{
+	                      border-bottom: none;
+	                    }
+
+	                    ul.bar_tabs>li{
+	                      border: none;
+	                    }
+
+	                    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+	                      border: none;
+	                      background: #f39c12;
+	                      color: white;
+	                    }
+
+	                    ul.bar_tabs>li a{
+	                      background: #1ABB9C;
+	                      color: white;
+	                    }
+
+	                    .nav-tabs>li>a:hover{
+	                      color: white;
+	                      background: #f39c12;
+	                    }
+	                  </style>
+
+	                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                        <!-- Tambahan 2018-09-12: Start -->
+                        <div class="x_title">
+                          <h4>Transmission Parameters</h4>
+                          <div class="clearfix"></div>
+                        </div>
+                        <!-- Tambahan 2018-09-12: Finish -->
+	                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+	                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Forward Power</a>
+	                        </li>
+	                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Reflected Power</a>
+	                        </li>
+	                      </ul>
+	                      <!-- TX Graph Content from js: Start -->
+                        <div id="myTabContent" class="tab-content">
+	                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                            <canvas id="mybarChart2" width="480" height="242" style="width: 484px; height: 242px;"></canvas>
+	                        </div>
+	                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+	                         <canvas id="reflected" width="480" height="242" style="width: 484px; height: 242px;"></canvas>
+	                        </div>
+	                      </div>
+                        <!-- TX Graph Content from js: Finish -->
+                        
+	                    </div>
+                      </div>
+
+	                  </div>
+	                </div>
+	              </div>
+                <!-- TX Graph: Finish -->
+          
+          <!-- RX Graph: Start -->
+			  <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h4>Receive Parameter</h4>
+                <div class="clearfix"></div>
+              </div>
+              <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                <li role="presentation" class="active">
+									<a href="#rx_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Link Margin</a>
+                </li>
+                <li role="presentation" class="">
+									<a href="#rx_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Signal Strength</a>
+                </li>
+                
+              </ul>
+              <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade active in" id="rx_content1" aria-labelledby="home-tab">
+                  <canvas id="link" width="480" height="242" style="width: 484px; height: 242px;"></canvas>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="rx_content2" aria-labelledby="profile-tab">
+                  <canvas id="signal-strength" width="480" height="242" style="width: 484px; height: 242px;"></canvas>
+                </div>
+                
+              </div>
+             
+            </div>
+          </div> 
+          <!-- RX Graph: Finish -->
+        
+				</div>
+
+
+
+	    </section>
+	    <!-- /.content -->
+
+	  </div>
+
+</template>

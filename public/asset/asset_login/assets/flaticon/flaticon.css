@@ -1,0 +1,118 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 28/07/2017 16:30
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+
+.fl-md, .fl-md:before, .fl-md:after {
+font-size: 24px !important;
+}
+
+.fl-sm, .fl-sm:before, .fl-sm:after {
+font-size: 18px !important;
+}
+
+.fl-lg, .fl-lg:before, .fl-lg:after {
+font-size: 36px !important;
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+/*font-size: 36px;*/
+font-style: normal;
+margin-left: 0;
+}
+
+
+.flaticon-cctv:before { content: "\f100"; }
+.flaticon-data-network:before { content: "\f101"; }
+.flaticon-technology-8:before { content: "\f102"; }
+.flaticon-transmission-tower:before { content: "\f103"; }
+.flaticon-technology-7:before { content: "\f104"; }
+.flaticon-computer-cpu:before { content: "\f105"; }
+.flaticon-signal-reception-button:before { content: "\f106"; }
+.flaticon-parabolic-antenna-1:before { content: "\f107"; }
+.flaticon-radio-tower-1:before { content: "\f108"; }
+.flaticon-satellite-dish-8:before { content: "\f109"; }
+.flaticon-satellite-dish-7:before { content: "\f10a"; }
+.flaticon-alarm:before { content: "\f10b"; }
+.flaticon-tower-with-signal-emission:before { content: "\f10c"; }
+.flaticon-signal-tower-symbol-1:before { content: "\f10d"; }
+.flaticon-connection-2:before { content: "\f10e"; }
+.flaticon-satellite-dish-6:before { content: "\f10f"; }
+.flaticon-broadcast-communications-tower:before { content: "\f110"; }
+.flaticon-wifi:before { content: "\f111"; }
+.flaticon-antenna-5:before { content: "\f112"; }
+.flaticon-satellite-dish-silhouette:before { content: "\f113"; }
+.flaticon-strength-3:before { content: "\f114"; }
+.flaticon-media-signal-tower:before { content: "\f115"; }
+.flaticon-strength-2:before { content: "\f116"; }
+.flaticon-satellite-dish-5:before { content: "\f117"; }
+.flaticon-radar-dish:before { content: "\f118"; }
+.flaticon-antenna-with-signal:before { content: "\f119"; }
+.flaticon-technology-6:before { content: "\f11a"; }
+.flaticon-satellite-dish-4:before { content: "\f11b"; }
+.flaticon-technology-5:before { content: "\f11c"; }
+.flaticon-danger:before { content: "\f11d"; }
+.flaticon-antenna-4:before { content: "\f11e"; }
+.flaticon-antenna-3:before { content: "\f11f"; }
+.flaticon-antenna-2:before { content: "\f120"; }
+.flaticon-antenna-1:before { content: "\f121"; }
+.flaticon-antenna:before { content: "\f122"; }
+.flaticon-technology-4:before { content: "\f123"; }
+.flaticon-symbols:before { content: "\f124"; }
+.flaticon-wireless:before { content: "\f125"; }
+.flaticon-technology-3:before { content: "\f126"; }
+.flaticon-cell-tower:before { content: "\f127"; }
+.flaticon-satellite-tv-dish:before { content: "\f128"; }
+.flaticon-parabolic-dish-with-signal:before { content: "\f129"; }
+.flaticon-technology-2:before { content: "\f12a"; }
+.flaticon-radio-tower:before { content: "\f12b"; }
+.flaticon-satellite-dish-2:before { content: "\f12c"; }
+.flaticon-siren-light:before { content: "\f12d"; }
+.flaticon-satellite-dish-1:before { content: "\f12e"; }
+.flaticon-technology-1:before { content: "\f12f"; }
+.flaticon-symbols-4:before { content: "\f130"; }
+.flaticon-frequency-antenna:before { content: "\f131"; }
+.flaticon-signal-1:before { content: "\f132"; }
+.flaticon-tower-transmissions:before { content: "\f133"; }
+.flaticon-wifi-signal-tower:before { content: "\f134"; }
+.flaticon-wifi-signal:before { content: "\f135"; }
+.flaticon-parabolic-antenna:before { content: "\f136"; }
+.flaticon-satellite-dish:before { content: "\f137"; }
+.flaticon-technology:before { content: "\f138"; }
+.flaticon-signal:before { content: "\f139"; }
+.flaticon-connection-1:before { content: "\f13a"; }
+.flaticon-signal-tower-symbol:before { content: "\f13b"; }
+.flaticon-symbols-3:before { content: "\f13c"; }
+.flaticon-strength-1:before { content: "\f13d"; }
+.flaticon-wifi-medium-signal-symbol:before { content: "\f13e"; }
+.flaticon-connection:before { content: "\f13f"; }
+.flaticon-symbols-2:before { content: "\f140"; }
+.flaticon-antenna-with-signal-lines-symbol:before { content: "\f141"; }
+.flaticon-tool-1:before { content: "\f142"; }
+.flaticon-symbols-1:before { content: "\f143"; }
+.flaticon-strength:before { content: "\f144"; }
+.flaticon-wifi-signal-symbol:before { content: "\f145"; }
+.flaticon-wifi-full-signal-interface-symbol:before { content: "\f146"; }
+.flaticon-tool:before { content: "\f147"; }
+.flaticon-satellite-dish-3:before { content: "\f148"; }

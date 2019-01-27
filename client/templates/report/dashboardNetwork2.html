@@ -1,0 +1,129 @@
+<template name="dashboardNetwork2">
+
+    <section class="content-header">
+      <h1>
+       Report Network 2
+        <small>All Site Area</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Report</a></li>
+        <li class="active">Report Network 2</li>
+      </ol>
+    </section>
+
+   <section class="content">
+    <div class="row">
+        <div class="col-md-3">
+          <!-- small box -->
+          <div class="small-box bg-blue"> 
+            <div class="inner">
+                <div class="row">
+                    <div class="col-md-2">
+                       <h3 style="font-size: 24px;">Total</h3>
+                        <i class="fa flaticon-satellite-dish-4 fl-lg text-white"></i>
+                    </div>
+                    <div class="col-md-10">
+                        <h2 class="text-right" style="font-size: 25px; margin: 13px 0 0 0;"><small style="color: rgba(238, 238, 238, 238);">Site: </small>{{allSite}}</h2>
+                        <h2 class="text-right" style="font-size: 25px; margin: 0;"><small style="color: rgba(238, 238, 238, 238);">Device: </small>{{allDev}}</h2>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <!-- small box -->
+          <div class="small-box bg-navy"> 
+            <div class="inner">
+                <div class="row">
+                    <div class="col-md-2">
+                        <h3 style="font-size: 24px;">Normal</h3>
+                        <i class="fa flaticon-satellite-dish-4 fl-lg text-white"></i>
+                    </div>
+                    <div class="col-md-10">
+                        <h2 class="text-right" style="font-size: 22px; margin: 13px 0 0 0;"><small style="color: rgba(238, 238, 238, 238);">Site: </small>{{normalSite}}</h2>
+                        <h2 class="text-right" style="font-size: 22px; margin: 0;"><small style="color: rgba(238, 238, 238, 238);">Device: </small>{{normalDev}} <small style="color: rgba(238, 238, 238, 238);font-size:96%;">({{normalPersen}})</small></h2>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+                <div class="row">
+                    <div class="col-md-2">
+                        <h3 style="font-size: 24px;">Major</h3>
+                        <i class="fa flaticon-satellite-dish-4 fl-lg text-white"></i>
+                    </div>
+                    <div class="col-md-10">
+                        <h2 class="text-right" style="font-size: 22px; margin: 13px 0 0 0;"><small style="color: rgba(238, 238, 238, 238);">Site: </small>{{majSite}}</h2>
+                        <h2 class="text-right" style="font-size: 22px; margin: 0;"><small style="color: rgba(238, 238, 238, 238);">Device: </small>{{majDev}} <small style="color: rgba(238, 238, 238, 238);font-size:96%;">({{majorPersen}})</small></h2>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+                <div class="row">
+                    <div class="col-md-2">
+                        <h3 style="font-size: 24px;">Critical</h3>
+                        <i class="fa flaticon-satellite-dish-4 fl-lg text-white"></i>
+                    </div>
+                    <div class="col-md-10">
+                        <h1 class="text-right" style="font-size: 22px; margin: 13px 0 0 0;"><small style="color: rgba(238, 238, 238, 238);">Site: </small>{{criSite}}</h1>
+                        <h1 class="text-right" style="font-size: 22px; margin: 0;"><small style="color: rgba(238, 238, 238, 238);">Device: </small>{{criDev}} <small style="color: rgba(238, 238, 238, 238);font-size:96%;">({{criPersen}})</small></h1>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+     
+     
+    
+     <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <ul class="users-list clearfix">
+              {{#each region in data_region}}
+                {{#if equals region.name 'NETWORK 2'}}
+                  {{#each site in data_site region._id}}
+                    <li id="site_menu" region-id="{{site._id._str}}">
+                        <a class="users-list-name" href="#" id="site" data-siteID="{{site._id._str}}">
+    <!--                         <i class="fa flaticon-satellite-dish-4 fl-lg text-red"></i> -->
+                        {{#if equals site.status 'red'}}
+                        <img class="img-responsive" height="50%" width="50%" src="/images/site_offline_v3.gif">
+                        {{/if}}
+
+                        {{#if equals site.status 'orange'}}
+                        <img class="img-responsive" height="50%" width="50%" src="/images/alert_orange_orange.gif">
+                        {{/if}}
+
+                        {{#if equals site.status '#2ecc71'}}
+                        <img class="img-responsive" height="50%" width="50%" src="/images/A.png">
+                        {{/if}}
+
+
+
+                            <br>
+                           <p>
+                             {{site.name}}
+                          </p>
+  <!--                           <span class="users-list-date">{{site.status}}</span> -->
+                        </a>
+                    </li>
+
+                  {{/each}}
+                {{/if}}
+              {{/each}}
+                            </ul>        
+        </div> 
+    </div>
+
+</section>
+
+    
+</template>

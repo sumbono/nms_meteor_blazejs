@@ -1,0 +1,35 @@
+<template name="doorSensor">
+    <style>
+    .todo-list > li .text {
+        display: inline-block;
+        margin-left: 0;
+        font-weight: 300;
+    }
+    .todo-list > li {
+        margin-bottom: 0;
+        border-left: none;
+        background: none;
+    }
+    </style>
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+    <div class="user-block">
+        <h1 class="pull-left" style="margin: 0;padding-left: 14px;padding-right: 14px;margin-top: 3px;"><i class="fa fa-sign-out text-blue"></i></h1>
+        <span class="username">Door Sensor</span>
+        <span class="description">Current Status</span>
+    </div>
+
+    <ul class="todo-list">
+        {{#each sitedev in data_site_devices site_id=_site_id device_id=_device_id}}
+            {{#each devsensor in data_site_device_sensor dev_id=sitedev.dev_id is_show=true}}
+                <li>
+                    <span class="text">{{devsensor.description}}</span>
+                    <div class="tools" style="display: block">
+                        <button class="btn btn-xs btn-link pull-right" data-chart="DE" style="margin: 0;"><i class="fa fa-line-chart text-yellow"></i></button>
+                        <small class="label label-danger" style="font-size: 85%;">CLOSE</small>
+                    </div>
+                </li>
+            {{/each}}
+        {{/each}}
+    </ul>
+</div>
+</template>

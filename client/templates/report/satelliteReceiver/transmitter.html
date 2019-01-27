@@ -1,0 +1,79 @@
+<template name="transmitter">
+    <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="user-block">
+            <h1 class="pull-left" style="margin: 0;padding-left: 14px;padding-right: 14px;margin-top: 3px;"><i class="fa flaticon-parabolic-antenna-1 text-blue"></i></h1>
+            <span class="username">Receiver</span>
+            <span class="description">Receiver Parameter</span>
+        </div>
+
+        <ul class="products-list product-list-in-box equipment">
+            {{#each sitedev in data_site_devices site_id=_site_id device_id=_device_id}}
+                {{#each devsensor in data_site_device_sensor dev_id=sitedev.dev_id is_show=true}}
+                    {{#each protocol in data_protocol devsensor.protocol_id._str}}
+            <li class="item" id="targetelement" data-devid="{{sitedev.dev_id}}" style="padding-bottom: 0; border-bottom: none;">
+                <div class="product-img">
+                    <span style="font-size: 59px;line-height: 0.85;" class="text-red">|</span>
+                </div>
+                <div class="product-info" style="margin-left: 0;">
+                    <div class="progress-group">
+                        <span class="progress-text title">{{sitedev.title}} - {{protocol.sensor}}</span>
+                        <span class="progress-number">
+                            <button id="r-detail" class="btn btn-xs btn-link" style="margin: 0; font-size: 11px; line-height: normal;"><i class="fa fa-info-circle text-blue"></i></button>
+                            <button class="btn btn-xs btn-link" style="margin: 0; border: 0; line-height: normal;"><i class="fa fa-line-chart text-yellow"></i></button>
+                        </span>
+
+                        <div class="progress" style="margin-bottom: 0; background-color: #d0d0d0;">
+                            <div class="progress-bar progress-bar-red text-right" role="progressbar" style="min-width: 0; text-align: right; width: 0%">{{devsensor.value_min}}&nbsp;</div>
+                        </div>
+
+                        <span class="progress-text min-vol" style="font-size: 12px;">0<font class="text-red">&nbsp;Low</font></span>
+                        <span class="progress-number max-vol" style="font-size: 12px;">{{devsensor.value_max}}&nbsp;{{devsensor.unit}}</span>
+                    </div>
+                </div>
+            </li>
+                    {{/each}}
+                {{/each}}
+            {{/each}}
+        </ul>
+    </div>
+
+    {{#each sitedev in data_site_devices site_id=_site_id device_id=_device_id}}
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" data-devid="{{sitedev.dev_id}}" id="detailPower {{powerClass sitedev.dev_id}}" style="display: none;">
+        <div class="user-block">
+            <h1 class="pull-left" style="margin: 0;padding-left: 14px;padding-right: 14px;margin-top: 3px;"><i class="fa fa-bolt text-blue"></i></h1>
+            <span class="username">{{sitedev.title}}</span>
+            <span class="description">Detail Information</span>
+        </div>
+
+        <ul class="products-list product-list-in-box equipment">
+            {{#each devsensor in data_site_device_sensor dev_id=sitedev.dev_id}}
+                {{#each protocol in data_protocol devsensor.protocol_id._str}}
+            <li class="item" id="targetelement" style="padding-bottom: 0; border-bottom: none;">
+                <div class="product-img">
+                    <span style="font-size: 59px;line-height: 0.85;" class="text-red">|</span>
+                </div>
+                <div class="product-info" style="margin-left: 0;">
+                    <div class="progress-group">
+                        <span class="progress-text title">{{protocol.sensor}}</span>
+                        <span class="progress-number">
+                            <button id="r-detail" class="btn btn-xs btn-link" style="margin: 0; font-size: 11px; line-height: normal;"><i class="fa fa-info-circle text-blue"></i></button>
+                            <button class="btn btn-xs btn-link" style="margin: 0; border: 0; line-height: normal;"><i class="fa fa-line-chart text-yellow"></i></button>
+                        </span>
+
+                        <div class="progress" style="margin-bottom: 0; background-color: #d0d0d0;">
+                            <div class="progress-bar progress-bar-red text-right" role="progressbar" style="min-width: 0; text-align: right; width: 0%">{{devsensor.value_min}}&nbsp;</div>
+                        </div>
+
+                        <span class="progress-text min-vol" style="font-size: 12px;">0<font class="text-red">&nbsp;Low</font></span>
+                        <span class="progress-number max-vol" style="font-size: 12px;">{{devsensor.value_max}}&nbsp;{{devsensor.unit}}</span>
+                    </div>
+                </div>
+            </li>
+                {{/each}}
+            {{/each}}
+        </ul>
+    </div>
+    {{/each}}
+</div>
+</template>

@@ -1,0 +1,63 @@
+/*
+ *  Document   : themes.css
+ *  Author     : pixelcave
+ */
+.themed-color-default {
+  color: #db4a39!important;
+}
+
+.themed-background-default {
+  background-color: #db4a39!important;
+}
+
+.themed-border-default {
+  border-color: #db4a39!important;
+}
+
+.themed-color-deepblue {
+  color: #397edb!important;
+}
+
+.themed-background-deepblue {
+  background-color: #397edb!important;
+}
+
+.themed-border-deepblue {
+  border-color: #397edb!important;
+}
+
+.themed-color-deepgreen {
+  color: #7ca955!important;
+}
+
+.themed-background-deepgreen {
+  background-color: #7ca955!important;
+}
+
+.themed-border-deepgreen {
+  border-color: #7ca955!important;
+}
+
+.themed-color-deeppurple {
+  color: #b739db!important;
+}
+
+.themed-background-deeppurple {
+  background-color: #b739db!important;
+}
+
+.themed-border-deeppurple {
+  border-color: #b739db!important;
+}
+
+.themed-color-deepwood {
+  color: #927254!important;
+}
+
+.themed-background-deepwood {
+  background-color: #927254!important;
+}
+
+.themed-border-deepwood {
+  border-color: #927254!important;
+}

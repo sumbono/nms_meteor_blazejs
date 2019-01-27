@@ -1,0 +1,424 @@
+<template name="userManagement">
+  <div class="x_content" style="background:#F9F9F9;">
+      
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+         <h1>
+            User Management        <small>Access Control</small>
+         </h1>
+         <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Setting</a></li>
+            <!--<li><a href="http://nms.scm.co.id:9000/usermanagement">User Managerment</a></li>-->
+            <li class="active">User List</li>
+         </ol>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+         <div class="row">
+            <div class="col-xs-12">
+               <div class="box">
+                  <!-- /.box-header -->
+                  <div class="box-body">
+                     <div class="bootstrap-table">
+                        <div class="fixed-table-toolbar">
+                          {{#if equals userName 'admin'}}
+                              <div class="columns columns-right btn-group pull-right">
+      <!--                               <button class="btn btn-default" type="button" name="refresh" aria-label="refresh" title="Refresh"><i class="fa fa-refresh"></i></button> -->
+      <!--                               <div class="keep-open btn-group" title="Columns">
+                                     <button type="button" aria-label="columns" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-list"></i> <span class="caret"></span></button>
+                                     <ul class="dropdown-menu" role="menu">
+                                        <li role="menuitem"><label><input type="checkbox" data-field="no" value="0" checked="checked"> No</label></li>
+                                        <li role="menuitem"><label><input type="checkbox" data-field="username" value="1" checked="checked"> Username</label></li>
+                                        <li role="menuitem"><label><input type="checkbox" data-field="realname" value="2" checked="checked"> Realname</label></li>
+                                        <li role="menuitem"><label><input type="checkbox" data-field="is_active" value="3" checked="checked"> Is Active</label></li>
+                                        <li role="menuitem"><label><input type="checkbox" data-field="option" value="4" checked="checked"> Option</label></li>
+                                     </ul>
+                                  </div> -->
+                                  <a id="btnadduser" href="#" class="btn btn-success" title="Add a User" data-target="#userSetup" data-toggle="modal" style="" data-original-title="Add User"><i class="fa fa-user-plus"></i></a>
+                                  <button href="#" class="btn btn-update btn-warning" id="btnpass" title="Change Your Password" style="margin-bottom: 0px;"><i class="fa fa-key"></i></button>
+                               </div>
+                                {{else}}
+                                    {{#if equals userName 'ms_cudo'}}
+                                        <div class="columns columns-right btn-group pull-right">
+                                          <a id="btnadduser" href="#" class="btn btn-success" title="Add a User" data-target="#userSetup" data-toggle="modal" style="" data-original-title="Add User"><i class="fa fa-user-plus"></i></a>
+                                          <button href="#" class="btn btn-update btn-warning" id="btnpass" title="Change Your Password" style="margin-bottom: 0px;"><i class="fa fa-key"></i></button>
+                                        </div>
+                                        {{else}}
+                                            <div class="columns columns-right btn-group pull-right">
+                                              <button href="#" class="btn btn-update btn-warning" id="btnpass" title="Change Your Password" style="margin-bottom: 0px;"><i class="fa fa-key"></i></button>
+                                            </div>
+<!--                                           {{#if notEquals userName 'admin'}}
+                                              <div class="columns columns-right btn-group pull-right">
+                                              </div>
+                                              {{else}}
+                                                {{#if notEquals userName 'ms_cudo'}}
+                                                  <div class="columns columns-right btn-group pull-right">
+                                                  </div>
+                                                {{/if}}
+                                          {{/if}} -->
+                                    {{/if}}
+                            {{/if}}
+<!--                            <div class="pull-right search"><input class="form-control" type="text" placeholder="Search"></div> -->
+                        </div>
+                        <div class="fixed-table-container" style="padding-bottom: 0px;">
+                           <div class="fixed-table-header" style="display: none;">
+                              <table></table>
+                           </div>
+                           <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 100%;">
+                              <div class="fixed-table-body" style="overflow: hidden; width: 100%; height: 100%;">
+<!--                                  <div class="fixed-table-loading" style="top: 41px; display: none;">Loading, please wait...</div> -->
+                                 <table id="tableAlarm" style="font-size: 15px;" data-side-pagination="server" data-pagination="true" 
+                                        data-page-size="15" data-search="true" data-show-refresh="true" data-show-columns="true" 
+                                        data-show-toggle="false" data-sort-name="createdOn" data-sort-order="desc" 
+                                        class="table table-hover table-condensed">
+                                    <thead bgcolor="#1e88e5" style="color: white;">
+                                       <tr>
+<!--                                           <th style="text-align: center; width: 3%; " data-field="no">
+                                             <div class="th-inner ">No</div>
+                                             <div class="fht-cell"></div>
+                                          </th> -->
+                                          <th style="text-align: center; width: 10%; " data-field="username">
+                                             <div class="th-inner ">Username</div>
+                                             <div class="fht-cell"></div>
+                                          </th>
+                                          <th style="text-align: center; width: 10%; " data-field="realname">
+                                             <div class="th-inner ">Scope Area/Site</div>
+                                             <div class="fht-cell"></div>
+                                          </th>
+<!--                                           <th style="text-align: center; width: 5%; " data-field="option">
+                                             <div class="th-inner ">Email</div>
+                                             <div class="fht-cell"></div>
+                                          </th> -->
+                                          <th style="text-align: center; width: 5%; " data-field="is_active">
+                                             <div class="th-inner ">Is Active</div>
+                                             <div class="fht-cell"></div>
+                                          </th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                      {{#each user in userList}}
+                                      <tr data-index="0">
+  <!--                                           <td style="text-align: center; width: 3%; ">1</td> -->
+                                        <td style="text-align: left; width: 10%; ">{{user.username}}</td>
+                                        <td style="text-align: left; width: 10%; ">{{user.scope}}</td>
+<!--                                         <td style="text-align: left; width: 5%;  ">{{user.email}}</td> -->
+                                        <td style="text-align: center; width: 5%;  "><span class="label label-success" type="button">Yes</span></td>
+<!--                                         <td style="text-align: center; width: 5%; ">                                            
+                                          <button href="#" class="btn btn-sm btn-update btn-primary " id="btnedit" title="Edit User" style="margin-bottom: 0px;"><i class="fa fa-edit"></i></button>
+                                          <button href="#" class="btn btn-sm btn-update btn-warning" id="btnpass" title="Change Password" style="margin-bottom: 0px;"><i class="fa fa-key"></i></button>
+                                          <button href="#" class="btn btn-sm btn-read btn-info" id="btnread" title="Read" style="margin-bottom: 0px;"><i class="fa fa-list-alt"></i></button>
+                                        </td> -->
+                                      </tr>
+                                      {{/each}}
+<!--                                       {{#if equals userName 'admin'}}
+                                          {{#each user in userList}}
+                                           <tr data-index="0">
+                                              <td style="text-align: left; width: 10%; ">{{user.username}}</td>
+                                              <td style="text-align: left; width: 10%; ">{{user.scope}}</td>
+                                              <td style="text-align: center; width: 5%;  "><button class="btn btn-success" type="button">Yes</button></td>
+                                              <td style="text-align: center; width: 5%; ">                                            
+                                                <button href="#" class="btn btn-sm btn-update btn-primary " id="btnedit" title="Edit User" style="margin-bottom: 0px;"><i class="fa fa-edit"></i></button>
+                                                <button href="#" class="btn btn-sm btn-update btn-warning" id="btnpass" title="Change Password" style="margin-bottom: 0px;"><i class="fa fa-key"></i></button>
+                                              </td>
+                                           </tr>
+                                          {{/each}}
+                                          {{else}}
+                                              {{#if equals userName 'ms_cudo'}}
+                                                  {{#each user in userList}}
+                                                   <tr data-index="0">
+                                                      <td style="text-align: left; width: 10%; ">{{user.username}}</td>
+                                                      <td style="text-align: left; width: 10%; ">{{user.scope}}</td>
+                                                      <td style="text-align: center; width: 5%;  "><button class="btn btn-success" type="button">Yes</button></td>
+                                                      <td style="text-align: center; width: 5%; ">                                            
+                                                        <button href="#" class="btn btn-sm btn-update btn-primary " id="btnedit" title="Edit User" style="margin-bottom: 0px;"><i class="fa fa-edit"></i></button>
+                                                        <button href="#" class="btn btn-sm btn-update btn-warning" id="btnpass" title="Change Password" style="margin-bottom: 0px;"><i class="fa fa-key"></i></button>
+                                                      </td>
+                                                   </tr>
+                                                  {{/each}}
+                                                  {{else}}
+                                                    {{#if notEquals userName 'admin'}}
+                                                        {{#each user in userList}}
+                                                         <tr data-index="0">
+                                                            <td style="text-align: left; width: 10%; ">{{user.username}}</td>
+                                                            <td style="text-align: left; width: 10%; ">{{user.scope}}</td>
+                                                            <td style="text-align: center; width: 5%;  "><button class="btn btn-success" type="button">Yes</button></td>
+                                                            <td style="text-align: center; width: 5%; ">
+                                                              <button href="#" class="btn btn-sm btn-update btn-primary " id="btnedit" title="Edit User" style="margin-bottom: 0px;"><i class="fa fa-edit"></i></button>
+                                                              <button href="#" class="btn btn-sm btn-update btn-warning" id="btnpass" title="Change Password" style="margin-bottom: 0px;"><i class="fa fa-key"></i></button>
+                                                            </td>
+                                                         </tr>
+                                                        {{/each}}
+                                                        {{else}}
+                                                          {{#if notEquals userName 'ms_cudo'}}
+                                                              {{#each user in userList}}
+                                                               <tr data-index="0">
+                                                                  <td style="text-align: left; width: 10%; ">{{user.username}}</td>
+                                                                  <td style="text-align: left; width: 10%; ">{{user.scope}}</td>
+                                                                  <td style="text-align: center; width: 5%;  "><button class="btn btn-success" type="button">Yes</button></td>
+                                                                  <td style="text-align: center; width: 5%; ">
+                                                                    <button href="#" class="btn btn-sm btn-update btn-primary " id="btnedit" title="Edit User" style="margin-bottom: 0px;"><i class="fa fa-edit"></i></button>
+                                                                    <button href="#" class="btn btn-sm btn-update btn-warning" id="btnpass" title="Change Password" style="margin-bottom: 0px;"><i class="fa fa-key"></i></button>
+                                                                  </td>
+                                                               </tr>
+                                                              {{/each}}
+                                                          {{/if}}
+                                                    {{/if}}
+                                              {{/if}}
+                                      {{/if}} -->
+                                    </tbody>
+                                 </table>
+                              </div>
+                              
+                           </div>
+                         
+                          
+                        </div>
+                     </div>
+                     
+                  </div>
+                  <!-- /.box-body -->
+               </div>
+               <!-- /.box -->
+            </div>
+            <!-- /.col -->
+         </div>
+         <!-- /.row -->
+      </section>
+   </div>
+  
+  <!-- MODAL START HERE -->
+  
+  <div class="modaladduser modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header bg-aqua color-palette" style="padding: 10px;">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title">ADD USER</h4>
+          </div>
+        <form>
+          <div class="modal-body">
+             <div class="row">
+                <div style="padding: 10px;">
+                  <div class="form-group">
+                    <label>Scope</label>
+                    <select class="form-control" id="site_id" name="scope" data-placeholder="Select a Area" style="width: 100%;" required>
+                      {{#each site in siteList}}
+                        <option id="site_ini" data-siteID="{{site._id._str}}">{{site.name}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" class="form-control" data-placeholder="your unique username" autocomplete="off" required/>
+                  </div>
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" name="email" class="form-control" data-placeholder="your active email" autocomplete="off" required/>
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" data-placeholder="" autocomplete="off" required/>
+                  </div>
+                </div>
+             </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" id="add_user" class="btn btn-success btn-save"><i class="fa fa-save"></i> Save</button>
+            <a href="" class="btn btn-default" id="cancel-form" data-dismiss="modal">Cancel</a>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+  
+  <div class="modalusermanagement modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-aqua color-palette" style="padding: 10px;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">EDIT USER</h4>
+      </div>
+      <form>
+        <div class="modal-body">
+          <div class="row">
+            <div style="padding: 10px;">
+              <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" data-placeholder="your unique username" autocomplete="off" required/>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="text" name="email" class="form-control" data-placeholder="your active email" autocomplete="off" required/>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" data-placeholder="" autocomplete="off" required/>
+              </div>
+              <div class="form-group">
+                <label>Scope</label>
+                <select class="form-control" name="scope" multiple="multiple" data-placeholder="Select a Area" style="width: 100%;" required>
+                  {{#each site in siteList}}
+                    <option value="1">{{site.name}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success btn-save"><i class="fa fa-save"></i> Save</button>
+          <a href="" class="btn btn-default" id="cancel-form" data-dismiss="modal">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- END HERE MODAL -->
+    <div class="modaluserpass modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+           <div class="modal-header bg-aqua color-palette">
+             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+             <h4 class="modal-title text-center">Change Password</h4>
+          </div>
+          {{> changePswd}}
+        </div>
+      </div>
+    </div>
+  <!-- END -->
+  
+<!--   <div class="modaluserread modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-aqua color-palette">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h4 class="modal-title text-center">User Access History</h4>
+   </div>
+       <div class="modal-body">
+      <div class="box box-primary">
+         <div class="box-header with-border">
+            <h3 class="box-title">Personal Detail</h3>
+         </div>
+         <div class="box-body">
+            <table class="table table-bordered table-striped">
+               <tbody>
+                  <tr>
+                     <td>ID</td>
+                     <td>000020</td>
+                  </tr>
+                  <tr>
+                     <td>Username</td>
+                     <td>Budi</td>
+                  </tr>
+                  <tr>
+                     <td>Realname</td>
+                     <td>Budi Sechoni</td>
+                  </tr>
+                  <tr>
+                     <td>Menu ID</td>
+                     <td>Dashboard,Report,Topology,Alarm,Map,Setting,Support,Management System,Custom Chart</td>
+                  </tr>
+                  <tr>
+                     <td>Area</td>
+                     <td>JAKARTA,JAWA BARAT,JAWA TIMUR</td>
+                  </tr>
+                  <tr>
+                     <td>Client</td>
+                     <td>INDOSIAR,SCTV</td>
+                  </tr>
+                  <tr>
+                     <td>Is Active</td>
+                     <td>Yes</td>
+                  </tr>
+                  <tr>
+                     <td>Active Since</td>
+                     <td>23/11/2018</td>
+                  </tr>
+                  <tr>
+                     <td>Expired At</td>
+                     <td>23/11/2020</td>
+                  </tr>
+                 
+               </tbody>
+            </table>
+         </div>
+         <div class="box-header with-border">
+            <h3 class="box-title">User History</h3>
+         </div>
+         <div class="box-body">
+            <table class="table table-bordered table-striped">
+               <tbody>
+                  <tr>
+                     <td>LoginOn</td>
+                     <td>2018-10-23 09:42:12</td>
+                  </tr>
+                  <tr>
+                     <td>LogoutOn</td>
+                     <td>2018-07-19 20:53:52</td>
+                  </tr>
+                  <tr>
+                     <td>LastloginOn</td>
+                     <td>2018-07-19 20:53:52</td>
+                  </tr>
+                  <tr>
+                     <td>CreatedOn</td>
+                     <td>2018-07-19 14:58:29</td>
+                  </tr>
+                  <tr>
+                     <td>UpdatedOn</td>
+                     <td>2018-10-23 09:42:12</td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+    
+    </div>
+  </div>
+</div> -->
+  <!-- END -->
+</template>
+
+<template name="changePswd">
+  <form id="pswd_ganti">
+    <div class="modal-body">
+      <input type="hidden" name="id" value="000020">
+        <div class="row">
+           <div class="col-xs-12">
+              <div class="box box-primary">
+                 <div class="box-header with-border">
+                    <h3 class="box-title">Change Password Form</h3>
+                 </div>
+                 <div class="box-body">
+                    <div class="form-group ">
+                       <label>Current Password</label>
+                       <input type="password" name="current_password" value="" class="form-control" data-placeholder="" autocomplete="off" required>
+                       <span></span>
+                    </div>
+                    <div class="form-group ">
+                       <label>New Password</label>
+                       <input type="password" name="new_password" value="" class="form-control" data-placeholder="" autocomplete="off" required>
+                       <span></span>
+                    </div>
+                    <div class="form-group ">
+                       <label>New Password Confirm</label>
+                       <input type="password" name="new_password_confirm" value="" class="form-control" data-placeholder="" autocomplete="off" required>
+                       <span></span>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+      <div class="row">
+        <hr>
+        <p id="form-messages"></p>
+        <hr>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary btn-save"><i class="fa fa-save"></i> &nbsp;Save</button>
+      <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    </div>
+  </form>
+</template>

@@ -1,0 +1,261 @@
+%!Adobe-FontList 1.14
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:MyanmarText
+FamilyName:Myanmar Text
+StyleName:Regular
+FullName:Myanmar Text
+MenuName:Myanmar Text
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\Project\SCM\Library\Font\mmrtext.ttf
+DataFormat:sfntData
+FileLength:355292
+FileModTime:1523489648
+WeightClass:400
+WidthClass:5
+AngleClass:0
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:MyanmarText-Bold
+FamilyName:Myanmar Text
+StyleName:Bold
+FullName:Myanmar Text Bold
+MenuName:Myanmar Text
+StyleBits:2
+WritingScript:Roman
+OutlineFileName:D:\Project\SCM\Library\Font\mmrtextb.ttf
+DataFormat:sfntData
+FileLength:335368
+FileModTime:1523489655
+WeightClass:700
+WidthClass:5
+AngleClass:0
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MyriadPro-Bold
+FamilyName:Myriad Pro
+StyleName:Bold
+FullName:Myriad Pro Bold
+MenuName:Myriad Pro
+StyleBits:2
+WritingScript:Roman
+OutlineFileName:D:\Project\SCM\Library\Font\MyriadPro-Bold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:103472
+FileModTime:1329281628
+WeightClass:700
+WidthClass:5
+AngleClass:0
+DesignSize:110
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MyriadPro-BoldCond
+FamilyName:Myriad Pro
+StyleName:Bold Condensed
+FullName:Myriad Pro Bold Condensed
+MenuName:Myriad Pro Cond
+StyleBits:2
+WritingScript:Roman
+OutlineFileName:D:\Project\SCM\Library\Font\MyriadPro-BoldCond.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:101012
+FileModTime:1329281628
+WeightClass:700
+WidthClass:3
+AngleClass:0
+DesignSize:110
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MyriadPro-BoldCondIt
+FamilyName:Myriad Pro
+StyleName:Bold Condensed Italic
+FullName:Myriad Pro Bold Condensed Italic
+MenuName:Myriad Pro Cond
+StyleBits:3
+WritingScript:Roman
+OutlineFileName:D:\Project\SCM\Library\Font\MyriadPro-BoldCondIt.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:104052
+FileModTime:1329281628
+WeightClass:700
+WidthClass:3
+AngleClass:1
+DesignSize:110
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MyriadPro-BoldIt
+FamilyName:Myriad Pro
+StyleName:Bold Italic
+FullName:Myriad Pro Bold Italic
+MenuName:Myriad Pro
+StyleBits:3
+WritingScript:Roman
+OutlineFileName:D:\Project\SCM\Library\Font\MyriadPro-BoldIt.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:107056
+FileModTime:1329281628
+WeightClass:700
+WidthClass:5
+AngleClass:1
+DesignSize:110
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MyriadPro-Cond
+FamilyName:Myriad Pro
+StyleName:Condensed
+FullName:Myriad Pro Condensed
+MenuName:Myriad Pro Cond
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\Project\SCM\Library\Font\MyriadPro-Cond.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:98776
+FileModTime:1329281628
+WeightClass:400
+WidthClass:3
+AngleClass:0
+DesignSize:110
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MyriadPro-CondIt
+FamilyName:Myriad Pro
+StyleName:Condensed Italic
+FullName:Myriad Pro Condensed Italic
+MenuName:Myriad Pro Cond
+StyleBits:1
+WritingScript:Roman
+OutlineFileName:D:\Project\SCM\Library\Font\MyriadPro-CondIt.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:102240
+FileModTime:1329281628
+WeightClass:400
+WidthClass:3
+AngleClass:1
+DesignSize:110
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MyriadPro-It
+FamilyName:Myriad Pro
+StyleName:Italic
+FullName:Myriad Pro Italic
+MenuName:Myriad Pro
+StyleBits:1
+WritingScript:Roman
+OutlineFileName:D:\Project\SCM\Library\Font\MyriadPro-It.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:105656
+FileModTime:1329281628
+WeightClass:400
+WidthClass:5
+AngleClass:1
+DesignSize:110
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MyriadPro-Regular
+FamilyName:Myriad Pro
+StyleName:Regular
+FullName:Myriad Pro
+MenuName:Myriad Pro
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\Project\SCM\Library\Font\MyriadPro-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:101732
+FileModTime:1329281628
+WeightClass:400
+WidthClass:5
+AngleClass:0
+DesignSize:110
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MyriadPro-Semibold
+FamilyName:Myriad Pro
+StyleName:Semibold
+FullName:Myriad Pro Semibold
+MenuName:Myriad Pro Light
+StyleBits:2
+WritingScript:Roman
+OutlineFileName:D:\Project\SCM\Library\Font\MyriadPro-Semibold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:103564
+FileModTime:1329281628
+WeightClass:600
+WidthClass:5
+AngleClass:0
+DesignSize:110
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MyriadPro-SemiboldIt
+FamilyName:Myriad Pro
+StyleName:Semibold Italic
+FullName:Myriad Pro Semibold Italic
+MenuName:Myriad Pro Light
+StyleBits:3
+WritingScript:Roman
+OutlineFileName:D:\Project\SCM\Library\Font\MyriadPro-SemiboldIt.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:107128
+FileModTime:1329281628
+WeightClass:600
+WidthClass:5
+AngleClass:1
+DesignSize:110
+%EndFont
+

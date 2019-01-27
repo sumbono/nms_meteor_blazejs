@@ -1,0 +1,11 @@
+body {
+    font-family: Lato,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
+.nav.navbar-nav>li>a {
+    color: #ffffff !important
+}
+
+.main-header .logo {
+    line-height: 45px;
+}

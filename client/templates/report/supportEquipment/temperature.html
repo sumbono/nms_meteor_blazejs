@@ -1,0 +1,37 @@
+<template name="temperature">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="user-block">
+            <h1 class="pull-left" style="margin: 0;padding-left: 14px;padding-right: 14px;margin-top: 3px;"><i class="fa fa-stethoscope text-blue"></i></h1>
+            <span class="username">Temperature</span>
+            <span class="description">Current Temperature</span>
+        </div>
+
+        <ul class="products-list product-list-in-box">
+        {{#each sitedev in data_site_devices site_id=_site_id device_id=_device_id }}
+            {{#each devsensor in data_site_device_sensor dev_id=sitedev.dev_id is_show=true}}
+            <li class="item" style="padding-bottom: 0; border-bottom: none;">
+                <div class="product-img">
+                    <span style="font-size: 59px;line-height: 1;" class="text-green">|</span>
+                </div>
+                <div class="product-info" style="margin-left: 0;">
+                    <div class="progress-group">
+                        <span class="progress-text">{{devsensor.description}}</span>
+                        <span class="progress-number">
+                            <button class="btn btn-xs btn-link" style="margin: 0; font-size: 11px; line-height: normal;"><i class="fa fa-info-circle text-blue"></i></button>
+                            <button class="btn btn-xs btn-link" style="margin: 0; border: 0; line-height: normal;"><i class="fa fa-line-chart text-yellow"></i></button>
+                        </span>
+                        <div class="progress md" style="margin-bottom: 0;">
+                          <div class="progress-bar progress-bar-aqua" style="width: {{valueNow value_max=devsensor.value_max dev_id=_device_id protocol=devsensor.protocol}}%">35&nbsp;</div>
+                        </div>
+                        <div>
+                            <span class="progress-number" style="font-size: 12px;">{{devsensor.value_max}} {{decodeUri devsensor.unit}}</span>
+                            <span class="progress-text" style="font-size: 12px;">{{devsensor.value_min}}<font class="text-red">&nbsp;Low</font></span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {{/each}}
+        {{/each}}
+        </ul>
+    </div>
+</template>

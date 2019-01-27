@@ -1,0 +1,17 @@
+<template name="reportIndex">
+    <style>
+        .box-header > .fa, .box-header > .glyphicon, .box-header > .ion, .box-header .box-title {font-size: 24px;}
+        .user-block .username, .user-block .description, .user-block .comment {margin-left: 40px;}
+        .list-group.panel-data > li.active > a {color: #444 !important;font-weight: bold;}
+        .menu-alarm-sidebarcontrol:hover,.menu-alarm-sidebarcontrol.active {background: none !important;font-weight: bold;}
+    </style>
+    <div class="content-wrapper">
+        <!-- {{> yield "content" }} -->
+        {{>Template.dynamic template=contentReport}}
+    </div>
+    <script>
+    $(function(){
+        $.AdminLTE.layout.fix();
+    })
+    </script>
+</template>

@@ -1,0 +1,347 @@
+<template name="stationIndex">
+  <!-- START SECTION -->
+  <div class="x_content" style="background:#F9F9F9;">
+    <style>
+       .select2-container--default .select2-selection--single .select2-selection__arrow {
+       height: 3px !important;
+       }
+       .select2-container .select2-selection--single {
+       height: 24px !important;
+       min-height: 24px !important;
+       }
+       #tableThreshold thead {
+       background-color: #1e88e5;
+       color: white;
+       }
+       .select2-results__option {
+       padding: 2px 5px;
+       }
+       .select2-search--dropdown .select2-search__field {
+       padding: 0px;
+       }
+       .select2-container--default .select2-selection--single .select2-selection__rendered {
+       line-height: 0px;
+       padding-top: 0px;
+       text-align: left;
+       }
+       .select2-container--default .select2-results>.select2-results__options {
+       font-size: 12px;
+       }
+       .fht-cell {
+       position: absolute;
+       top: -45px;
+       width: 112px;
+       }
+       .fht-cell .form-control {
+       font-size: 11px;
+       }
+    </style>
+    <section class="content-header">
+      <h1>
+        Station Management<small>Access Control</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Setting</a></li>
+        <li class="active"><a href="">Site List</a></li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+           <div class="box">
+              <div class="box-body">
+                 <div class="bootstrap-table">
+                    <div class="fixed-table-toolbar">
+                       <div class="columns columns-right btn-group pull-right">
+                         {{#if equals userName 'admin'}}
+                             <a id="btnaddsite" href="#" class="btn btn-success" title="ADD SITE">
+                               Add New Site
+                             </a>
+                            {{else}}
+                            {{#if equals userName 'installer'}}
+                              <a id="btnaddsite" href="#" class="btn btn-success" title="ADD SITE">
+                                Add New Site
+                              </a>
+                            {{else}}
+                              <p></p>
+                            {{/if}}
+                         {{/if}}
+                       </div>
+                    </div>
+                    <div class="fixed-table-container" style="padding-bottom: 0px;">
+                       <div class="fixed-table-header" style="display: none;">
+                          <table></table>
+                       </div>
+                       <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 100%;">
+                          <div class="fixed-table-body" style="overflow: hidden; width: 100%; height: 100%;">
+                          <style>
+                            table {
+                                border-collapse: collapse;
+                                border-spacing: 0;
+                                width: 100%;
+                                border: 1px solid #ddd;
+                            }
+                            th {
+                                text-align: left;
+                                padding: 8px;
+                            }
+                            td {
+                                text-align: left;
+                                padding: 1px;
+                            }
+                            .blink {
+                              -webkit-animation: blink .75s linear infinite;
+                              -moz-animation: blink .75s linear infinite;
+                              -ms-animation: blink .75s linear infinite;
+                              -o-animation: blink .75s linear infinite;
+                               animation: blink .75s linear infinite;
+                            }
+                            @-webkit-keyframes blink {
+                              0% { opacity: 1; }
+                              50% { opacity: 1; }
+                              50.01% { opacity: 0; }
+                              100% { opacity: 0; }
+                            }
+                            @-moz-keyframes blink {
+                              0% { opacity: 1; }
+                              50% { opacity: 1; }
+                              50.01% { opacity: 0; }
+                              100% { opacity: 0; }
+                            }
+                            @-ms-keyframes blink {
+                              0% { opacity: 1; }
+                              50% { opacity: 1; }
+                              50.01% { opacity: 0; }
+                              100% { opacity: 0; }
+                            }
+                            @-o-keyframes blink {
+                              0% { opacity: 1; }
+                              50% { opacity: 1; }
+                              50.01% { opacity: 0; }
+                              100% { opacity: 0; }
+                            }
+                            @keyframes blink {
+                              0% { opacity: 1; }
+                              50% { opacity: 1; }
+                              50.01% { opacity: 0; }
+                              100% { opacity: 0; }
+                            }
+                          </style>
+                            <div style="overflow-x:auto;" >
+                             <table id="tableAlarm" style="font-size: 13px;" 
+                                    class="table table-hover table-condensed table-responsive table-sm ">
+                                <thead bgcolor="#1e88e5" style="color: white;">
+                                   <tr>
+                                      <th style="text-align: center; width: 25%; " data-field="site">
+                                         <div class="th-inner">Station Name</div>
+                                         <div class="fht-cell"></div>
+                                      </th>
+                                      <th style="text-align: center; width: 25%; " data-field="site">
+                                         <div class="th-inner">KST</div>
+                                         <div class="fht-cell"></div>
+                                      </th>
+                                      <th style="text-align: center; width: 25%; " data-field="alamat">
+                                         <div class="th-inner">Alamat</div>
+                                         <div class="fht-cell"></div>
+                                      </th>
+                                      <th style="text-align: center; width: 25%; " data-field="site">
+                                         <div class="th-inner">Latitude-Longtitude</div>
+                                         <div class="fht-cell"></div>
+                                      </th>
+                                      <th style="text-align: center; width: 25%; " data-field="update">
+                                         <div class="th-inner">Link</div>
+                                         <div class="fht-cell"></div>
+                                      </th>
+                                      <th style="text-align: center; width: 50%; " data-field="option">
+                                         <div class="th-inner ">Options</div>
+                                         <div class="fht-cell"></div>
+                                      </th>
+                                   </tr>
+                                </thead>
+                                <tbody>
+                                  {{#each site in siteList}}
+                                   <tr data-index="{{site._id._str}}" data-siteName="{{site.name}}">
+                                      <td style="text-align: left; width: 20%; ">{{site.name}}</td>
+                                      <td style="text-align: left; width: 20%; ">{{site.kst_name}}</td>
+                                      <td style="text-align: left; width: 20%; ">{{site.address}}</td>
+                                      <td style="text-align: center; width: 20%; ">{{site.latlng}}</td>
+                                      {{#if equals site.status '#2ecc71'}}
+                                        <td style="text-align: center; width: 20%; color: green; ">
+                                          <i class="fa flaticon-parabolic-antenna-1 fa-lg text-green"></i>
+                                        </td>
+                                        {{else}}
+                                          {{#if equals site.status 'orange'}}
+                                            <td style="text-align: center; width: 20%; color: orange; ">
+                                              <i class="fa flaticon-parabolic-antenna-1 fa-lg text-orange"></i>
+                                            </td>
+                                          {{else}}
+                                            <td style="text-align: center; width: 20%; color: red; ">
+                                              <i class="fa flaticon-parabolic-antenna-1 fa-lg text-red blink"></i>
+                                            </td>
+                                          {{/if}}
+                                      {{/if}}
+                                      <td style="text-align: center; width: 25%; ">
+                                        <a id="btndetail" href="" class="btn btn-xs btn-info" style="margin: 0 0 0 0;" title="Site info detail"><i class="fa fa-list-alt"></i></a>
+                                        <a id="btnRemoveSite" href="" class="btn btn-xs btn-danger" style="margin: 0 0 0 0;" title="Remove this site??"><i class="fa fa-trash"></i></a>
+                                      </td>
+                                   </tr>
+                                  {{/each}}
+                                </tbody>
+                             </table>
+                            </div>
+                          </div>
+<!--                           <div class="slimScrollBar" style="background: rgb(52, 152, 219); width: 4px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 188.017px;"></div> -->
+<!--                           <div class="slimScrollRail" style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div> -->
+                       </div>
+                       <div class="fixed-table-footer" style="display: none;">
+                          <table>
+                             <tbody>
+                                <tr></tr>
+                             </tbody>
+                          </table>
+                       </div>
+                    </div>
+                      <div class="fixed-table-pagination" style="display: block;">
+                        <div class="pull-left pagination">
+                            <ul class="pagination">
+                              <li class="page-pre">
+                                <a href="#" id="prev">
+                                  <i class="fa fa-arrow-left"></i>
+                                  <span >Prev</span>
+                                </a>
+                              </li>
+                            </ul>
+                        </div>
+                        <div class="pull-right pagination">
+                          <ul class="pagination">
+                            <li class="page-next">
+                              <a href="#" id="next">
+                                <span >Next</span>
+                                <i class="fa fa-arrow-right"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="clearfix"></div>
+              </div>
+              <!-- /.box-body -->
+           </div>
+           <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    
+  </div>
+  <!-- END SECTION -->
+  
+  <!-- START MODALS -->
+ <div class="modaladduser modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+       <div class="modal-header bg-aqua color-palette">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title text-center">ADD NEW SITE</h4>
+       </div>
+       <div class="modal-body">
+          <form accept-charset="utf-8">
+             <div class="row">
+                <div class="col-xs-12">
+                   <div class="box box-primary" style="border-top: none; margin-top: -10px;">
+                      <div class="box-body">
+                         <div class="form-group">
+                            <label>Region</label>
+                            <select class="form-control" id="region_id" data-placeholder="Select a Area" style="width: 100%;" required>
+                              {{#each region in regionList}}
+                                <option id="region_ini" data-regionID="{{region._id._str}}">{{region.name}}</option>
+                              {{/each}}
+                            </select>
+                            <span></span>
+                         </div>
+                         <div class="form-group ">
+                            <label>Station Name</label>
+                            <input type="text" name="site_name" value="" class="form-control" data-placeholder="" autocomplete="off" required>
+                            <span></span>
+                         </div>
+                         <div class="form-group ">
+                            <label>KST Name</label>
+                            <input type="text" name="kst_name" value="" class="form-control" data-placeholder="" autocomplete="off" required>
+                         </div>
+                         <div class="form-group ">
+                            <label>Address</label>
+                            <textarea name="address" class="form-control" data-placeholder="" autocomplete="off" required></textarea>
+                         </div>
+                         <div class="form-group ">
+                            <label>Latitude-Longtitude</label>
+                            <input type="text" name="latlong" value="" class="form-control" data-placeholder="" autocomplete="off" required>
+                         </div>
+                          <button type="submit" class="btn btn-primary btn-save"><i class="fa fa-save"></i> &nbsp;Save</button>
+                          <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="row"><hr></div>
+          </form>
+       </div>
+    </div>
+  </div>
+</div>
+<!-- END MODALS -->
+  
+<!-- START MODALS REMOVE SITE-->
+<div class="modalremovesite modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+       <div class="modal-header bg-red color-palette">
+          <span type="button" class="close" data-dismiss="modal" aria-hidden="true">×</span>
+          <h4 class="modal-title text-center" style="margin-bottom: 10px;">REMOVE SITE</h4>
+       </div>
+       <div class="modal-body">
+         <div class="row">
+            <div class="col-xs-12 text-center">
+              <h3>{{siteRemoved.name}}</h3>
+              <p>Are you sure want to remove this site?</p>
+              <button id="removesiteini" data-dismiss="modal" class="btn btn-danger " aria-hidden="true" style="margin: 0 0 0 0; padding: 5px 15px 5px 15px;">Yes</button>
+              <button class="btn btn-success " data-dismiss="modal" style="margin: 0 0 0 0; padding: 5px 15px 5px 15px;">No</button>
+<!--                <div class="box box-primary " style="border-top: none;"> -->
+<!--                   <div class="box-body "> -->
+<!--                      <div class="form-group "> -->
+                        
+<!--                      </div> -->
+<!--                   </div> -->
+<!--                </div> -->
+           <div class="row"><br></div>
+            </div>
+         </div>
+       </div>
+    </div>
+  </div>
+</div>
+<!-- END MODALS REMOVE SITE-->
+
+<!-- START MODAL DETAILS -->
+<div class="modaldetail modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+     <div class="modal-header bg-aqua color-palette">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title text-center">Station Detail</h4>
+     </div>
+     <div class="modal-body">
+        <div class="box box-primary" style="border-top: none; margin-top: -10px;">
+           <div class="box-header with-border">
+           </div>
+           <div id="detailSiteIni" class="box-body">
+           </div>
+        </div>
+     </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL DETAIL -->
+  
+</template>
